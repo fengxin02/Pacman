@@ -1,6 +1,6 @@
 package Project.Frame;
 
-import Project.GamePanel;
+import Project.Panel.GamePanel;
 import Project.Layout.MenuLayout;
 
 import javax.swing.*;
@@ -95,8 +95,13 @@ public class MenuFrame extends JFrame
         root.revalidate();
         root.repaint();
         GamePanel game = new GamePanel(root);
-
-
+        //check if everything is done
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                game.startGame();
+            }
+        });
     }
 
 
