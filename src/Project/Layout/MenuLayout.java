@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class MenuLayout extends LayoutAdapter
 {
+    //stores the objects, and add to the panel
     List<Component> lis = new ArrayList<Component>();
     @Override
     public void addLayoutComponent(Component comp, Object constraints)
