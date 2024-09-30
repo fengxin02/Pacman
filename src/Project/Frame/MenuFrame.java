@@ -94,7 +94,8 @@ public class MenuFrame extends JFrame
         root.removeAll();
         root.revalidate();
         root.repaint();
-        GamePanel game = new GamePanel(root);
+        this.remove(root);
+        GamePanel game = new GamePanel(this);
         //check if everything is done
         SwingUtilities.invokeLater(new Runnable() {
             @Override

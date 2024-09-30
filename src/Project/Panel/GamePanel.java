@@ -3,19 +3,37 @@ package Project.Panel;
 import Project.Character.Pacman;
 import Project.Listener.GameKeyListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.util.Arrays;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class GamePanel extends JPanel {
-    private JPanel root;
+    //root panel
+
+
+    //private JPanel root;
+
+
+    //score
     private int points = 0;
+    //pacman
     private Pacman pacman = new Pacman();
     private Timer gameTimer;
 
+    private int FPS = 60;
+    private int PacManMoveDelay = 3;
+    private int FpsCounter = 0;
+
+    private BufferedImage CoinImage;
+    private BufferedImage GhostImage;
+    private BufferedImage PacmanImage;
+    private BufferedImage WallImage;
     //0 == empty road
     //1 == spots on road
     //2 == wall
@@ -25,32 +43,104 @@ public class GamePanel extends JPanel {
     //9  == ghost
 
     //random map not done yet
+    // [10][12]
     private int[][] map = {
             {2,2,2,2,2,2,2,2,2,2,2,2},
             {2,1,1,1,1,1,1,1,1,1,1,2},
             {2,1,2,2,1,1,1,1,1,1,1,2},
             {2,1,1,1,2,2,2,2,2,2,2,2},
-            {2,1,2,2,2,2,1,2,1,1,1,2},
+            {2,1,2,2,2,2,2,2,1,1,1,2},
             {2,1,1,2,1,1,9,1,1,1,1,2},
-            {2,1,1,2,5,1,1,4,7,2,1,2},
+            {2,1,1,1,5,1,1,4,7,2,1,2},
             {2,1,1,2,1,1,2,2,1,1,1,2},
             {2,1,1,2,1,1,1,2,1,2,1,2},
             {2,2,2,2,2,2,2,2,2,2,2,2},
     };
-
-    public GamePanel(JPanel root)
+    //root
+    public GamePanel(JFrame menu)
     {
-        this.root = root;
-        this.root.setFocusable(true);
-        this.root.addKeyListener(new GameKeyListener(this));
+        //add new panel to menu
+        menu.add(this);
+        menu.setContentPane(this);
+        //root
+        this.setFocusable(true);
+        //root
+        this.addKeyListener(new GameKeyListener(this));
         //make sure panel focused
-        this.root.requestFocusInWindow();
+        //root
+        this.requestFocusInWindow();
+
+        this.setBackground(Color.black);
+        //load image
+
+        try {
+            CoinImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\coin.png"));
+            WallImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\bricks-wall.png"));
+            GhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\ghost.png"));
+            PacmanImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacman.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        if(PacmanImage == null)
+        {
+            System.out.println("no picture");
+        }
 
 
 
     }
 
 
+    @Override
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        //root
+        int height = getHeight();
+        //root
+        int width = getWidth();
+        //hang
+        int rows = map.length;
+        //lie
+        int cols = map[0].length;
+        int cellheight = height / rows;
+        int cellwidth = width / cols;
+        for(int row = 0; row < rows; row++)
+        {
+            for(int col = 0; col < cols; col++)
+            {
+                int x = col * cellwidth;
+                int y = row * cellheight;
+
+                switch(map[row][col])
+                {
+                    case 0:
+
+                        break;
+                    case 1:
+                        g.drawImage(CoinImage, x, y, cellwidth, cellheight, null);
+                        break;
+                    case 2:
+                        g.drawImage(WallImage, x, y, cellwidth, cellheight, null);
+                        break;
+                    case 5:
+                        g.drawImage(PacmanImage, x, y, cellwidth, cellheight, null);
+                        break;
+                    case 4:
+                        break;
+                    case 7:
+                        break;
+                    case 9:
+                        g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 
     public void setDirection(int direc)
     {
@@ -327,15 +417,24 @@ public class GamePanel extends JPanel {
 
     public void startGame()
     {
-        gameTimer = new Timer(3000, new ActionListener() {
+        gameTimer = new Timer(400, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                move();
-                printMap(map);
-                System.out.println();
-                System.out.println(pacman.getDirection());
-                System.out.println();
+                //root
+                revalidate();
+                repaint();
+                //makes pacman moves slower
+                if (FpsCounter % PacManMoveDelay == 0) {
+                    move();
+                    printMap(map);
+                    System.out.println();
+                    System.out.println(pacman.getDirection());
+                    System.out.println();
+                }
+
+                PacManMoveDelay++;
+
                 pacman.getPlace(map);
                 int x = pacman.getX();
                 int y = pacman.getY();
@@ -343,6 +442,23 @@ public class GamePanel extends JPanel {
                 {
                     gameTimer.stop();
                     System.out.println("GG");
+                }
+                //check if game ends, if there is no more coin, you win
+                int coinCount = 0;
+                for(int rows = 0; rows < map.length; rows++)
+                {
+                    for(int cols = 0; cols < map[0].length; cols++)
+                    {
+                        if(map[rows][cols] == 1)
+                        {
+                            coinCount++;
+                        }
+                    }
+                }
+                if(coinCount == 0)
+                {
+                    gameTimer.stop();
+                    System.out.println("You WIN!");
                 }
             }
         });
