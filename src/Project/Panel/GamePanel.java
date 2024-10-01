@@ -14,11 +14,6 @@ import java.io.IOException;
 
 
 public class GamePanel extends JPanel {
-    //root panel
-
-
-    //private JPanel root;
-
 
     //score
     private int points = 0;
@@ -30,9 +25,15 @@ public class GamePanel extends JPanel {
     private int PacManMoveDelay = 3;
     private int FpsCounter = 0;
 
+    //loading images
+    private BufferedImage PacmanRightImage;
+    private BufferedImage PacmanLeftImage;
+    private BufferedImage PacmanUpImage;
+    private BufferedImage PacmanDownImage;
+
+
     private BufferedImage CoinImage;
     private BufferedImage GhostImage;
-    private BufferedImage PacmanImage;
     private BufferedImage WallImage;
     //0 == empty road
     //1 == spots on road
@@ -77,13 +78,17 @@ public class GamePanel extends JPanel {
             CoinImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\coin.png"));
             WallImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\bricks-wall.png"));
             GhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\ghost.png"));
-            PacmanImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacman.png"));
+
+            PacmanLeftImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmanleft.png"));
+            PacmanUpImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmanup.png"));
+            PacmanRightImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacman.png"));
+            PacmanDownImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmandown.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
 
-        if(PacmanImage == null)
+        if(PacmanRightImage == null)
         {
             System.out.println("no picture");
         }
@@ -97,9 +102,7 @@ public class GamePanel extends JPanel {
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        //root
         int height = getHeight();
-        //root
         int width = getWidth();
         //hang
         int rows = map.length;
@@ -126,7 +129,23 @@ public class GamePanel extends JPanel {
                         g.drawImage(WallImage, x, y, cellwidth, cellheight, null);
                         break;
                     case 5:
-                        g.drawImage(PacmanImage, x, y, cellwidth, cellheight, null);
+                        //check the direction of pacman and choose the right one
+                        if(pacman.getDirection() == 65)
+                        {
+                            g.drawImage(PacmanLeftImage, x, y, cellwidth, cellheight, null);
+                        }
+                        if(pacman.getDirection() == 87)
+                        {
+                            g.drawImage(PacmanUpImage, x, y, cellwidth, cellheight, null);
+                        }
+                        if(pacman.getDirection() == 83)
+                        {
+                            g.drawImage(PacmanDownImage, x, y, cellwidth, cellheight, null);
+                        }
+                        if(pacman.getDirection() == 68)
+                        {
+                            g.drawImage(PacmanRightImage, x, y, cellwidth, cellheight, null);
+                        }
                         break;
                     case 4:
                         break;

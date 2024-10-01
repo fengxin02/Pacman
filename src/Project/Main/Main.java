@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class Main {
 
+    //calls the menu
     public static void showMenu()
     {
         MenuFrame menu = new MenuFrame("PACMAN");
