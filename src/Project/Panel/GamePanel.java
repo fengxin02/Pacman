@@ -1,5 +1,7 @@
 package Project.Panel;
 
+import Project.Character.FoolGhost;
+import Project.Character.Ghost;
 import Project.Character.Pacman;
 import Project.Listener.GameKeyListener;
 
@@ -21,8 +23,7 @@ public class GamePanel extends JPanel {
     private Pacman pacman = new Pacman();
     private Timer gameTimer;
 
-    private int FPS = 60;
-    private int PacManMoveDelay = 3;
+    //calculate the fps for the movement speed
     private int FpsCounter = 0;
 
     //loading images
@@ -31,17 +32,22 @@ public class GamePanel extends JPanel {
     private BufferedImage PacmanUpImage;
     private BufferedImage PacmanDownImage;
 
-
+    private BufferedImage CherryImage;
+    private BufferedImage StrawberryImage;
     private BufferedImage CoinImage;
     private BufferedImage GhostImage;
     private BufferedImage WallImage;
     //0 == empty road
-    //1 == spots on road
+    //1 == coins on road
     //2 == wall
     //5 == pacman
     //4  == cherry
     //7 == strawberry
-    //9  == ghost
+    //20  == fool_ghost, 21 == fool ghost on coin, 27 fool ghost on strawberry, 24 == fool ghost on cherry
+    private Ghost foolghost = new FoolGhost(20, 3);
+    // need more ghost
+    // 40 == smart__ghost
+    // 50 == random__ghost
 
     //random map not done yet
     // [10][12]
@@ -51,7 +57,7 @@ public class GamePanel extends JPanel {
             {2,1,2,2,1,1,1,1,1,1,1,2},
             {2,1,1,1,2,2,2,2,2,2,2,2},
             {2,1,2,2,2,2,2,2,1,1,1,2},
-            {2,1,1,2,1,1,9,1,1,1,1,2},
+            {2,1,1,2,1,1,20,1,1,1,1,2},
             {2,1,1,1,5,1,1,4,7,2,1,2},
             {2,1,1,2,1,1,2,2,1,1,1,2},
             {2,1,1,2,1,1,1,2,1,2,1,2},
@@ -78,7 +84,8 @@ public class GamePanel extends JPanel {
             CoinImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\coin.png"));
             WallImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\bricks-wall.png"));
             GhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\ghost.png"));
-
+            StrawberryImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\strawberry.png"));
+            CherryImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\cherries.png"));
             PacmanLeftImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmanleft.png"));
             PacmanUpImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmanup.png"));
             PacmanRightImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacman.png"));
@@ -128,6 +135,9 @@ public class GamePanel extends JPanel {
                     case 2:
                         g.drawImage(WallImage, x, y, cellwidth, cellheight, null);
                         break;
+                    case 4:
+                        g.drawImage(CherryImage, x, y, cellwidth, cellheight, null);
+                        break;
                     case 5:
                         //check the direction of pacman and choose the right one
                         if(pacman.getDirection() == 65)
@@ -147,11 +157,21 @@ public class GamePanel extends JPanel {
                             g.drawImage(PacmanRightImage, x, y, cellwidth, cellheight, null);
                         }
                         break;
-                    case 4:
-                        break;
                     case 7:
+                        g.drawImage(StrawberryImage, x, y, cellwidth, cellheight, null);
                         break;
-                    case 9:
+                    //25 26 32 29
+                    case 20:
+                        g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
+                        break;
+                    //9  == fool_ghost, 10 == fool ghost on coin, 16 fool ghost on strawberry, 13 == fool ghost on cherry
+                    case 21:
+                        g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
+                        break;
+                    case 27:
+                        g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
+                        break;
+                    case 24:
                         g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
                         break;
                     default:
@@ -238,6 +258,7 @@ public class GamePanel extends JPanel {
             }
             else
             {
+                //you move to next block whatever there is.
                 map[y][x] -= 5;
                 map[y][x+1] += 5;
                 //check add points
@@ -266,13 +287,34 @@ public class GamePanel extends JPanel {
                     points += 20;
                 }
 
+                //20  == fool_ghost, 21 == fool ghost on coin, 27 fool ghost on strawberry, 24 == fool ghost on cherry
+
+
                 //check run into ghost
-                if(map[y][x+1] == 14)
+                if(map[y][x+1] == 25)
+                {
+                    //die
+                    map[y][x+1] -=5;
+                }
+                //check run into ghost on coin
+                if(map[y][x+1] == 26)
+                {
+                    //die
+                    map[y][x+1] -=5;
+                }
+                //check run into ghost on strawberry
+                if(map[y][x+1] == 32)
                 {
                     //die
                     map[y][x+1] -=5;
                 }
 
+                //check run into ghost on cherry
+                if(map[y][x+1] == 29)
+                {
+                    //die
+                    map[y][x+1] -=5;
+                }
             }
         }
 
@@ -311,9 +353,29 @@ public class GamePanel extends JPanel {
                     map[y][x-1] -= 7;
                     points += 20;
                 }
-
+                //25 26 32 29
                 //check run into ghost
-                if(map[y][x-1] == 14)
+                if(map[y][x-1] == 25)
+                {
+                    //die
+                    map[y][x-1] -=5;
+                }
+
+                //check run into ghost on coin
+                if(map[y][x-1] == 26)
+                {
+                    //die
+                    map[y][x-1] -=5;
+                }
+                //check run into ghost on strawberry
+                if(map[y][x-1] == 32)
+                {
+                    //die
+                    map[y][x-1] -=5;
+                }
+
+                //check run into ghost on cherry
+                if(map[y][x-1] == 29)
                 {
                     //die
                     map[y][x-1] -=5;
@@ -332,7 +394,7 @@ public class GamePanel extends JPanel {
             else
             {
                 map[y][x] =  map[y][x] - 5;
-                map[y-1][x] = map[y][x] +5;
+                map[y-1][x] = map[y-1][x] +5;
                 //check add points
                 if(map[y-1][x] == 6)
                 {
@@ -358,9 +420,30 @@ public class GamePanel extends JPanel {
                     map[y-1][x] -= 7;
                     points += 20;
                 }
+                //25 26 32 29
 
                 //check run into ghost
-                if(map[y-1][x] == 14)
+                if(map[y-1][x] == 25)
+                {
+                    //die
+                    map[y-1][x] -=5;
+                }
+
+                //check run into ghost on coin
+                if(map[y-1][x] == 26)
+                {
+                    //die
+                    map[y-1][x] -=5;
+                }
+                //check run into ghost on strawberry
+                if(map[y-1][x] == 32)
+                {
+                    //die
+                    map[y-1][x] -=5;
+                }
+
+                //check run into ghost on cherry
+                if(map[y-1][x] == 29)
                 {
                     //die
                     map[y-1][x] -=5;
@@ -379,7 +462,7 @@ public class GamePanel extends JPanel {
             else
             {
                 map[y][x] = map[y][x] - 5;
-                map[y+1][x] = map[y][x] + 5;
+                map[y+1][x] = map[y+1][x] + 5;
                 //check add points
                 if(map[y+1][x] == 6)
                 {
@@ -406,8 +489,30 @@ public class GamePanel extends JPanel {
                     points += 20;
                 }
 
+
+                //25 26 32 29
+
                 //check run into ghost
-                if(map[y+1][x] == 14)
+                if(map[y+1][x] == 25)
+                {
+                    //die
+                    map[y+1][x] -=5;
+                }
+                //check run into ghost on coin
+                if(map[y+1][x] == 26)
+                {
+                    //die
+                    map[y+1][x] -=5;
+                }
+                //check run into ghost on strawberry
+                if(map[y+1][x] == 32)
+                {
+                    //die
+                    map[y+1][x] -=5;
+                }
+
+                //check run into ghost on cherry
+                if(map[y+1][x] == 29)
                 {
                     //die
                     map[y+1][x] -=5;
@@ -434,6 +539,8 @@ public class GamePanel extends JPanel {
     }
 
 
+
+    //the game runs here
     public void startGame()
     {
         gameTimer = new Timer(400, new ActionListener() {
@@ -444,15 +551,21 @@ public class GamePanel extends JPanel {
                 revalidate();
                 repaint();
                 //makes pacman moves slower
-                if (FpsCounter % PacManMoveDelay == 0) {
+                if (FpsCounter % pacman.getPacManMoveDelay() == 0) {
                     move();
                     printMap(map);
                     System.out.println();
                     System.out.println(pacman.getDirection());
                     System.out.println();
                 }
+                if(FpsCounter % foolghost.getGhostMoveDelay() == 0)
+                {
+                    foolghost.move(map);
+                    //
+                }
+                System.out.println("YOUR POINTS :" + points);
 
-                PacManMoveDelay++;
+                FpsCounter++;
 
                 pacman.getPlace(map);
                 int x = pacman.getX();
@@ -468,7 +581,8 @@ public class GamePanel extends JPanel {
                 {
                     for(int cols = 0; cols < map[0].length; cols++)
                     {
-                        if(map[rows][cols] == 1)
+                        //check if there is any gold more, and any ghost step on gold
+                        if(map[rows][cols] == 1 || map[rows][cols] == foolghost.getGhostId()+1)
                         {
                             coinCount++;
                         }

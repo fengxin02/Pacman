@@ -1,8 +1,11 @@
 package Project.Character;
 
 public class Pacman {
+    //coordinate of pacman
     private int x = -1;
     private int y = -1;
+
+    private int PacManMoveDelay = 1;
 
     //68   = d  right
     //65   = a  left
@@ -11,6 +14,12 @@ public class Pacman {
     private int direction = 68;
 
     public Pacman() {}
+
+    public int getPacManMoveDelay()
+    {
+        return PacManMoveDelay;
+    }
+
 
     public int getX()
     {
