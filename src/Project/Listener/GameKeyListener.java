@@ -1,16 +1,23 @@
 package Project.Listener;
 
+import Project.Frame.MenuFrame;
 import Project.Panel.GamePanel;
+import Project.SaveGame.SaveMap;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameKeyListener implements KeyListener {
     GamePanel gamePanel;
-
-    public GameKeyListener(GamePanel gamePanel)
+    int[][] map;
+    JFrame menuFrame;
+    public GameKeyListener(GamePanel gamePanel, int[][]map, JFrame menuFrame)
     {
+
+        this.menuFrame = menuFrame;
         this.gamePanel = gamePanel;
+        this.map = map;
     }
 
     @Override
@@ -40,8 +47,19 @@ public class GameKeyListener implements KeyListener {
             case 68:
                 gamePanel.setDirection(68);
                 break;
-            default:
+            
+                //bullshit delete this
+                //g = save the map
+            case 71:
+                //save game
+                gamePanel.removeAll();
+                gamePanel.revalidate();
+                gamePanel.repaint();
+                menuFrame.remove(gamePanel);
 
+                SaveMap s = new SaveMap(map,menuFrame);
+            default:
+                break;
         }
     }
 

@@ -1,39 +1,36 @@
-package Project.Frame;
+package Project.SaveGame;
 
-import Project.Panel.GamePanel;
+import Project.Frame.MenuFrame;
 import Project.Layout.MenuLayout;
+import Project.Panel.GamePanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuFrame extends JFrame
-{
-    //root panel
-    JPanel root = new JPanel();
+//saves the game to JSON
+public class SaveMap {
+    int[][] map;
+    JFrame menu;
+    public SaveMap(int[][] map, JFrame menuFrame) {
+        this.map = map;
+        menu = menuFrame;
 
-    public MenuFrame(String title)
-    {
-        super(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //size setting
-        setSize(500,500);
+        // save somehow
 
-        //put the frame to the middle of the screen
-        setLocationRelativeTo(null);
-        setContentPane(root);
 
-        //Frame is visible
-        setVisible(true);
-    }
-    public void startSetUp()
-    {
-        //set black background
-        root.setBackground(Color.BLACK);
-
+        //end the game with first date =1000
+        map[0][0] = 1000;
+        //not a good solution to copy and paste the hole code to there, i need to write a new class
+        //for Menu JPanel ini
+        JPanel root = new JPanel();
+        menu.add(root);
+        menu.setContentPane(root);
+        root.setFocusable(true);
         root.setLayout(new MenuLayout());
-
+        root.setBackground(Color.BLACK);
+        menu.setVisible(true);
         JLabel title = new JLabel("PAC-MAN");
         title.setFont(new Font("Copper Black", Font.BOLD, 50));
         title.setForeground(new Color(230,242,86));
@@ -50,7 +47,18 @@ public class MenuFrame extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-               gamePanelIni();
+                root.removeAll();
+                root.revalidate();
+                root.repaint();
+                menuFrame.remove(root);
+                GamePanel game = new GamePanel(menuFrame);
+                //check if everything is done
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        game.startGame();
+                    }
+                });
             }
         });
 
@@ -87,23 +95,4 @@ public class MenuFrame extends JFrame
 
 
     }
-
-    public void gamePanelIni()
-    {
-        //removes the buttons and labels in the panel
-        root.removeAll();
-        root.revalidate();
-        root.repaint();
-        this.remove(root);
-        GamePanel game = new GamePanel(this);
-        //check if everything is done
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                game.startGame();
-            }
-        });
-    }
-
-
 }

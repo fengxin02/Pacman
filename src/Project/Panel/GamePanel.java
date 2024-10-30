@@ -45,6 +45,7 @@ public class GamePanel extends JPanel {
     //7 == strawberry
     //20  == fool_ghost, 21 == fool ghost on coin, 27 fool ghost on strawberry, 24 == fool ghost on cherry
     private Ghost foolghost = new FoolGhost(20, 3);
+    // considering putting all 3 ghosts into an ArrayList to make the task correct
     // need more ghost
     // 40 == smart__ghost
     // 50 == random__ghost
@@ -72,7 +73,7 @@ public class GamePanel extends JPanel {
         //root
         this.setFocusable(true);
         //root
-        this.addKeyListener(new GameKeyListener(this));
+        this.addKeyListener(new GameKeyListener(this, map, menu));
         //make sure panel focused
         //root
         this.requestFocusInWindow();
@@ -127,7 +128,6 @@ public class GamePanel extends JPanel {
                 switch(map[row][col])
                 {
                     case 0:
-
                         break;
                     case 1:
                         g.drawImage(CoinImage, x, y, cellwidth, cellheight, null);
@@ -547,6 +547,30 @@ public class GamePanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                //check if game is loaded, if game is loaded then first date changes to 1000
+                if(map[0][0] == 1000)
+                {
+                    gameTimer.stop();
+                }
+
+                //check if game ends, if there is no more coin, you win
+                int coinCount = 0;
+                for(int rows = 0; rows < map.length; rows++)
+                {
+                    for(int cols = 0; cols < map[0].length; cols++)
+                    {
+                        //check if there is any gold more, and any ghost step on gold
+                        if(map[rows][cols] == 1 || map[rows][cols] == foolghost.getGhostId()+1)
+                        {
+                            coinCount++;
+                        }
+                    }
+                }
+                if(coinCount == 0)
+                {
+                    gameTimer.stop();
+                    System.out.println("You WIN!");
+                }
                 //root
                 revalidate();
                 repaint();
@@ -575,52 +599,27 @@ public class GamePanel extends JPanel {
                     gameTimer.stop();
                     System.out.println("GG");
                 }
-                //check if game ends, if there is no more coin, you win
-                int coinCount = 0;
-                for(int rows = 0; rows < map.length; rows++)
-                {
-                    for(int cols = 0; cols < map[0].length; cols++)
-                    {
-                        //check if there is any gold more, and any ghost step on gold
-                        if(map[rows][cols] == 1 || map[rows][cols] == foolghost.getGhostId()+1)
-                        {
-                            coinCount++;
-                        }
-                    }
-                }
-                if(coinCount == 0)
-                {
-                    gameTimer.stop();
-                    System.out.println("You WIN!");
-                }
+//                //check if game ends, if there is no more coin, you win
+//                int coinCount = 0;
+//                for(int rows = 0; rows < map.length; rows++)
+//                {
+//                    for(int cols = 0; cols < map[0].length; cols++)
+//                    {
+//                        //check if there is any gold more, and any ghost step on gold
+//                        if(map[rows][cols] == 1 || map[rows][cols] == foolghost.getGhostId()+1)
+//                        {
+//                            coinCount++;
+//                        }
+//                    }
+//                }
+//                if(coinCount == 0)
+//                {
+//                    gameTimer.stop();
+//                    System.out.println("You WIN!");
+//                }
             }
         });
         gameTimer.start();
     }
-
-//    public void startGame()
-//    {
-//        int i = 0;
-//        while(true)
-//        {
-//            if(i % 1050 == 0)
-//            {
-//                move();
-//                printMap(map);
-//                System.out.println();
-//                System.out.println();
-//            }
-//            i++;
-//            pacman.getPlace(map);
-//            int x = pacman.getX();
-//            int y = pacman.getY();
-//            if(x == -1 && y == -1)
-//            {
-//                break;
-//            }
-//        }
-//    }
-
-
 
 }
