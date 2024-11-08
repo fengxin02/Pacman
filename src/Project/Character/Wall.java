@@ -44,6 +44,8 @@ public class Wall implements GameElement {
         return false;
     }
 
+
+
     @Override
     public boolean collide(Coin coin) {
         return false;

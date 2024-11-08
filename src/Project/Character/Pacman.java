@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class Pacman implements GameElement{
     //coordinate of pacman
-    private int x = -1; //4
-    private int y = -1;//6
+    private int x = 4; //4
+    private int y = 6;//6
 
     private int points = 0;
     private int PacManMoveDelay = 1;
@@ -94,6 +94,8 @@ public class Pacman implements GameElement{
         y = -1;
     }
 
+
+
     @Override
     public boolean collide(Wall wall) {
         return false;
@@ -119,6 +121,7 @@ public class Pacman implements GameElement{
     public boolean collide(Road road) {
         return true;
     }
+
 
     @Override
     public boolean collide(Coin coin) {
@@ -170,7 +173,8 @@ public class Pacman implements GameElement{
                     map[y][x] = new Road();
                     this.x = x+1;
                     coordinate[0] = x+1;
-                }else{
+                }
+                else{
                     coordinate[0] = -1;
                     coordinate[1] = -1;
                 }
@@ -188,7 +192,8 @@ public class Pacman implements GameElement{
                     map[y][x] = new Road();
                     this.x = x-1;
                     coordinate[0] = x-1;
-                }else{
+                }
+                else{
                     coordinate[0] = -1;
                     coordinate[1] = -1;
                 }
@@ -206,7 +211,8 @@ public class Pacman implements GameElement{
                     map[y][x] = new Road();
                     this.y = y-1;
                     coordinate[1] = y-1;
-                }else{
+                }
+                else{
                     coordinate[0] = -1;
                     coordinate[1] = -1;
                 }
@@ -224,7 +230,8 @@ public class Pacman implements GameElement{
                     map[y][x] = new Road();
                     this.y = y+1;
                     coordinate[1] = y+1;
-                }else{
+                }
+                else{
                     coordinate[0] = -1;
                     coordinate[1] = -1;
                 }

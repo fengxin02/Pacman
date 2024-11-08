@@ -3,14 +3,10 @@ package Project.Panel;
 import Project.Character.*;
 import Project.Listener.GameKeyListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 
 public class GamePanel extends JPanel {
@@ -23,8 +19,8 @@ public class GamePanel extends JPanel {
 
     //calculate the fps for the movement speed
     private int FpsCounter = 0;
-    private int[] pacmanMove = new int[2];
-
+    private int[] pacmanLoc = new int[2];
+    private int[] foolghostLoc = new int[2];
     //loading images
 
     //0 == empty road
@@ -34,7 +30,7 @@ public class GamePanel extends JPanel {
     //4  == cherry
     //7 == strawberry
     //20  == fool_ghost, 21 == fool ghost on coin, 27 fool ghost on strawberry, 24 == fool ghost on cherry
-    private Ghost foolghost = new FoolGhost( 3);
+    //private Ghost foolghost = new FoolGhost( 3);
     // considering putting all 3 ghosts into an ArrayList to make the task correct
     // need more ghost
     // 40 == smart__ghost
@@ -44,18 +40,6 @@ public class GamePanel extends JPanel {
     // [10][12]
     private GameElement[][] omap = new GameElement[10][12];
 
-    private int[][] map = {
-            {2,2,2,2,2,2,2,2,2,2,2,2},
-            {2,1,1,1,1,1,1,1,1,1,1,2},
-            {2,1,2,2,1,1,1,1,1,1,1,2},
-            {2,1,1,1,2,2,2,2,2,2,2,2},
-            {2,1,2,2,2,2,2,2,1,1,1,2},
-            {2,1,1,2,1,1,20,1,1,1,1,2},
-            {2,1,1,1,5,1,1,4,7,2,1,2},
-            {2,1,1,2,1,1,2,2,1,1,1,2},
-            {2,1,1,2,1,1,1,2,1,2,1,2},
-            {2,2,2,2,2,2,2,2,2,2,2,2},
-    };
     //root
     public void iniMap(GameElement[][] omap){
         //first row
@@ -106,7 +90,7 @@ public class GamePanel extends JPanel {
         omap[5][0] = new Wall();         omap[5][1] = new Coin(10);
         omap[5][2] = new Coin(10); omap[5][3] = new Coin(10);
         omap[5][4] = new Wall();         omap[5][5] = new Coin(10);
-        omap[5][6] = new Coin(10); omap[5][7] = new FoolGhost(3);
+        omap[5][6] = new Coin(10); omap[5][7] = new FoolGhost(3, 7, 5);
         omap[5][8] = new Coin(10); omap[5][9] = new Coin(10);
         omap[5][10] =new Coin(10); omap[5][11] = new Wall();
 
@@ -155,7 +139,12 @@ public class GamePanel extends JPanel {
         //root
         this.setFocusable(true);
         //root
-        this.addKeyListener(new GameKeyListener(this, map, menu));
+        iniMap(omap);
+        pacmanLoc[0] = 4;
+        pacmanLoc[1] = 6;
+        foolghostLoc[0] = 7;
+        foolghostLoc[1] = 5;
+        this.addKeyListener(new GameKeyListener(this, omap, menu));
         //make sure panel focused
         //root
         this.requestFocusInWindow();
@@ -164,9 +153,7 @@ public class GamePanel extends JPanel {
         //load image
 
 
-        iniMap(omap);
-        pacmanMove[0] = 4;
-        pacmanMove[1] = 6;
+
 
     }
 
@@ -177,8 +164,8 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         int height = getHeight();
         int width = getWidth();
-        int pacX = pacmanMove[0];
-        int pacY = pacmanMove[1];
+        int pacX = pacmanLoc[0];
+        int pacY = pacmanLoc[1];
         //hang
         int rows = omap.length;
         //lie
@@ -191,68 +178,16 @@ public class GamePanel extends JPanel {
             {
                 int x = col * cellwidth;
                 int y = row * cellheight;
-
                 omap[row][col].paintImage(g, x, y, cellwidth, cellheight);
-//                switch(omap[row][col])
-//                {
-//                    case 0:
-//                        break;
-//                    case 1:
-//                        g.drawImage(CoinImage, x, y, cellwidth, cellheight, null);
-//                        break;
-//                    case 2:
-//                        g.drawImage(WallImage, x, y, cellwidth, cellheight, null);
-//                        break;
-//                    case 4:
-//                        g.drawImage(CherryImage, x, y, cellwidth, cellheight, null);
-//                        break;
-//                    case 5:
-//                        //check the direction of pacman and choose the right one
-//                        if(omap[pacY][pacX].getDirection() == 65)
-//                        {
-//                            g.drawImage(PacmanLeftImage, x, y, cellwidth, cellheight, null);
-//                        }
-//                        if(omap[pacY][pacX].getDirection() == 87)
-//                        {
-//                            g.drawImage(PacmanUpImage, x, y, cellwidth, cellheight, null);
-//                        }
-//                        if(omap[pacY][pacX].getDirection() == 83)
-//                        {
-//                            g.drawImage(PacmanDownImage, x, y, cellwidth, cellheight, null);
-//                        }
-//                        if(omap[pacY][pacX].getDirection() == 68)
-//                        {
-//                            g.drawImage(PacmanRightImage, x, y, cellwidth, cellheight, null);
-//                        }
-//                        break;
-//                    case 7:
-//                        g.drawImage(StrawberryImage, x, y, cellwidth, cellheight, null);
-//                        break;
-//                    //25 26 32 29
-//                    case 20:
-//                        g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
-//                        break;
-//                    //9  == fool_ghost, 10 == fool ghost on coin, 16 fool ghost on strawberry, 13 == fool ghost on cherry
-//                    case 21:
-//                        g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
-//                        break;
-//                    case 27:
-//                        g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
-//                        break;
-//                    case 24:
-//                        g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
-//                        break;
-//                    default:
-//                        break;
-//                }
+//
             }
         }
     }
 
     public void setDirection(int direc)
     {
-        int x = pacmanMove[0];
-        int y = pacmanMove[1];
+        int x = pacmanLoc[0];
+        int y = pacmanLoc[1];
         int pacdirec = omap[y][x].getDirection();
         //68   = d  right
         //65   = a  left
@@ -306,24 +241,6 @@ public class GamePanel extends JPanel {
     }
 
 
-
-
-    //if there is no 5 in map game over
-
-    public void printMap(int[][] map)
-    {
-        for(int i = 0; i < map.length; i++)
-        {
-            for(int j = 0; j < map[0].length; j++)
-            {
-                System.out.print(map[i][j]);
-            }
-            System.out.println();
-        }
-    }
-
-
-
     //the game runs here
     public void startGame()
     {
@@ -331,19 +248,20 @@ public class GamePanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //check if game is loaded, if game is loaded then first date changes to 1000
-//                if(map[0][0] == 1000)
-//                {
-//                    gameTimer.stop();
-//                }
 
+                //when map is saved the first elem will be null
+                if(omap[0][0] == null)
+                {
+                    gameTimer.stop();
+                }
                 //check if game ends, if there is no more coin, you win
-                int x = pacmanMove[0];
-                int y = pacmanMove[1];
+                int x = pacmanLoc[0];
+                int y = pacmanLoc[1];
                 if(omap[y][x].getPoint() == 820)
                 {
                     System.out.println("You WIN!");
                     gameTimer.stop();
+                    return;
                 }
                 //root
                 revalidate();
@@ -351,9 +269,18 @@ public class GamePanel extends JPanel {
 
                 //makes pacman moves slower
                 if (FpsCounter % omap[y][x].getMoveDelay() == 0) {
+                    omap[y][x].move(omap, pacmanLoc);
+                    x = pacmanLoc[0];
+                    y = pacmanLoc[1];
+                    if (x == -1 && y == -1)
+                    {
+                        gameTimer.stop();
+                        System.out.println("GG");
+                        return;
+                    }
 
-                    omap[y][x].move(omap,pacmanMove);
                     if(omap[y][x].getPoint() > points){
+
                         points = omap[y][x].getPoint();
                     }
                     //printMap(map);
@@ -361,345 +288,28 @@ public class GamePanel extends JPanel {
                     System.out.println(omap[y][x].getDirection());
                     System.out.println();
                 }
-                if(FpsCounter % foolghost.getGhostMoveDelay() == 0)
+                int fx = foolghostLoc[0];
+                int fy = foolghostLoc[1];
+                if(FpsCounter % omap[fy][fx].getMoveDelay() == 0)
                 {
-//                    foolghost.move(map,pacmanMove);
-                    //
+                    omap[fy][fx].move(omap, foolghostLoc);
+                }
+                x = pacmanLoc[0];
+                y = pacmanLoc[1];
+                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1])
+                {
+                    gameTimer.stop();
+                    System.out.println("GG");
+                    return;
                 }
                 System.out.println("YOUR POINTS :" + points);
 
                 FpsCounter++;
 
-                x = pacmanMove[0];
-                y = pacmanMove[1];
-                if (x == -1 && y == -1)
-                {
-                    gameTimer.stop();
-                    System.out.println("GG");
-                }
-//                //check if game ends, if there is no more coin, you win
-//                int coinCount = 0;
-//                for(int rows = 0; rows < map.length; rows++)
-//                {
-//                    for(int cols = 0; cols < map[0].length; cols++)
-//                    {
-//                        //check if there is any gold more, and any ghost step on gold
-//                        if(map[rows][cols] == 1 || map[rows][cols] == foolghost.getGhostId()+1)
-//                        {
-//                            coinCount++;
-//                        }
-//                    }
-//                }
-//                if(coinCount == 0)
-//                {
-//                    gameTimer.stop();
-//                    System.out.println("You WIN!");
-//                }
+
             }
         });
         gameTimer.start();
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//    public void move()
-//    {
-//        try
-//        {
-//            pacman.getPlace(map);
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//        int x = pacman.getX();
-//        int y = pacman.getY();
-//        int direction = pacman.getDirection();
-//        //68   = d  right
-//        //65   = a  left
-//        //87   = w  up
-//        //83   = s  down
-//        if(direction == 68) //right
-//        {
-//            //if wall
-//            if(map[y][x+1] == 2)
-//            {
-//                //stay and do not do anything
-//            }
-//            else
-//            {
-//                //you move to next block whatever there is.
-//                map[y][x] -= 5;
-//                map[y][x+1] += 5;
-//                //check add points
-//                if(map[y][x+1] == 6)
-//                {
-//                    //add point
-//                    points += 1;
-//                    map[y][x+1] -= 1;
-//                }
-//                //check road
-//                if(map[y][x+1] == 5)
-//                {
-//                    map[y][x+1] = 5;
-//                    //nothing
-//                }
-//                //check cherry
-//                if(map[y][x+1] == 9)
-//                {
-//                    map[y][x+1] -= 4;
-//                    points += 10;
-//                }
-//                //check strawberry
-//                if(map[y][x+1] == 12)
-//                {
-//                    map[y][x+1] -= 7;
-//                    points += 20;
-//                }
-//
-//                //20  == fool_ghost, 21 == fool ghost on coin, 27 fool ghost on strawberry, 24 == fool ghost on cherry
-//
-//
-//                //check run into ghost
-//                if(map[y][x+1] == 25)
-//                {
-//                    //die
-//                    map[y][x+1] -=5;
-//                }
-//                //check run into ghost on coin
-//                if(map[y][x+1] == 26)
-//                {
-//                    //die
-//                    map[y][x+1] -=5;
-//                }
-//                //check run into ghost on strawberry
-//                if(map[y][x+1] == 32)
-//                {
-//                    //die
-//                    map[y][x+1] -=5;
-//                }
-//
-//                //check run into ghost on cherry
-//                if(map[y][x+1] == 29)
-//                {
-//                    //die
-//                    map[y][x+1] -=5;
-//                }
-//            }
-//        }
-//
-//        if(direction == 65) //left
-//        {
-//            //if wall
-//            if(map[y][x-1] == 2)
-//            {
-//                //stay and do not do anything
-//            }
-//            else
-//            {
-//                map[y][x] -= 5;
-//                map[y][x-1] += 5;
-//                //check add points
-//                if(map[y][x-1] == 6)
-//                {
-//                    //add point
-//                    points += 1;
-//                    map[y][x-1] -= 1;
-//                }
-//                //check road
-//                if(map[y][x-1] == 5)
-//                {
-//                    //nothing
-//                }
-//                //check cherry
-//                if(map[y][x-1] == 9)
-//                {
-//                    map[y][x-1] -= 4;
-//                    points += 10;
-//                }
-//                //check strawberry
-//                if(map[y][x-1] == 12)
-//                {
-//                    map[y][x-1] -= 7;
-//                    points += 20;
-//                }
-//                //25 26 32 29
-//                //check run into ghost
-//                if(map[y][x-1] == 25)
-//                {
-//                    //die
-//                    map[y][x-1] -=5;
-//                }
-//
-//                //check run into ghost on coin
-//                if(map[y][x-1] == 26)
-//                {
-//                    //die
-//                    map[y][x-1] -=5;
-//                }
-//                //check run into ghost on strawberry
-//                if(map[y][x-1] == 32)
-//                {
-//                    //die
-//                    map[y][x-1] -=5;
-//                }
-//
-//                //check run into ghost on cherry
-//                if(map[y][x-1] == 29)
-//                {
-//                    //die
-//                    map[y][x-1] -=5;
-//                }
-//
-//            }
-//        }
-//
-//        if(direction == 87) //up
-//        {
-//            //if wall
-//            if(map[y-1][x] == 2)
-//            {
-//                //stay and do not do anything
-//            }
-//            else
-//            {
-//                map[y][x] =  map[y][x] - 5;
-//                map[y-1][x] = map[y-1][x] +5;
-//                //check add points
-//                if(map[y-1][x] == 6)
-//                {
-//                    //add point
-//                    points += 1;
-//                    map[y-1][x] -= 1;
-//                }
-//                //check road
-//                if(map[y-1][x] == 5)
-//                {
-//                    map[y-1][x] = 5;
-//                    //nothing
-//                }
-//                //check cherry
-//                if(map[y-1][x] == 9)
-//                {
-//                    map[y-1][x] -= 4;
-//                    points += 10;
-//                }
-//                //check strawberry
-//                if(map[y-1][x] == 12)
-//                {
-//                    map[y-1][x] -= 7;
-//                    points += 20;
-//                }
-//                //25 26 32 29
-//
-//                //check run into ghost
-//                if(map[y-1][x] == 25)
-//                {
-//                    //die
-//                    map[y-1][x] -=5;
-//                }
-//
-//                //check run into ghost on coin
-//                if(map[y-1][x] == 26)
-//                {
-//                    //die
-//                    map[y-1][x] -=5;
-//                }
-//                //check run into ghost on strawberry
-//                if(map[y-1][x] == 32)
-//                {
-//                    //die
-//                    map[y-1][x] -=5;
-//                }
-//
-//                //check run into ghost on cherry
-//                if(map[y-1][x] == 29)
-//                {
-//                    //die
-//                    map[y-1][x] -=5;
-//                }
-//
-//            }
-//        }
-//
-//        if(direction == 83) //down
-//        {
-//            //if wall
-//            if(map[y+1][x] == 2)
-//            {
-//                //stay and do not do anything
-//            }
-//            else
-//            {
-//                map[y][x] = map[y][x] - 5;
-//                map[y+1][x] = map[y+1][x] + 5;
-//                //check add points
-//                if(map[y+1][x] == 6)
-//                {
-//                    //add point
-//                    points += 1;
-//                    map[y+1][x] -= 1;
-//                }
-//                //check road
-//                if(map[y+1][x] == 5)
-//                {
-//                    map[y+1][x] = 5;
-//                    //nothing
-//                }
-//                //check cherry
-//                if(map[y+1][x] == 9)
-//                {
-//                    map[y+1][x] -= 4;
-//                    points += 10;
-//                }
-//                //check strawberry
-//                if(map[y+1][x] == 12)
-//                {
-//                    map[y+1][x] -= 7;
-//                    points += 20;
-//                }
-//
-//
-//                //25 26 32 29
-//
-//                //check run into ghost
-//                if(map[y+1][x] == 25)
-//                {
-//                    //die
-//                    map[y+1][x] -=5;
-//                }
-//                //check run into ghost on coin
-//                if(map[y+1][x] == 26)
-//                {
-//                    //die
-//                    map[y+1][x] -=5;
-//                }
-//                //check run into ghost on strawberry
-//                if(map[y+1][x] == 32)
-//                {
-//                    //die
-//                    map[y+1][x] -=5;
-//                }
-//
-//                //check run into ghost on cherry
-//                if(map[y+1][x] == 29)
-//                {
-//                    //die
-//                    map[y+1][x] -=5;
-//                }
-//
-//            }
-//        }
-//
-//    }

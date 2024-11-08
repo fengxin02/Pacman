@@ -1,5 +1,6 @@
 package Project.Listener;
 
+import Project.Character.GameElement;
 import Project.Frame.MenuFrame;
 import Project.Panel.GamePanel;
 import Project.SaveGame.SaveMap;
@@ -10,9 +11,9 @@ import java.awt.event.KeyListener;
 
 public class GameKeyListener implements KeyListener {
     GamePanel gamePanel;
-    int[][] map;
+    GameElement[][] map;
     JFrame menuFrame;
-    public GameKeyListener(GamePanel gamePanel, int[][]map, JFrame menuFrame)
+    public GameKeyListener(GamePanel gamePanel, GameElement[][]map, JFrame menuFrame)
     {
 
         this.menuFrame = menuFrame;

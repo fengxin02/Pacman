@@ -11,6 +11,10 @@ public class Road implements GameElement{
 
     @Override
     public boolean collide(FoolGhost ghost) {
+        ghost.setIsNextRoad(true);
+        ghost.setIsNextCoin(false);
+        ghost.setIsNextStrawberry(false);
+        ghost.setIsNextCherry(false);
         return true;
     }
 
@@ -29,6 +33,7 @@ public class Road implements GameElement{
     public boolean collide(Road road) {
         return true;
     }
+
 
     @Override
     public boolean collide(Coin coin) {

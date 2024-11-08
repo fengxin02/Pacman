@@ -34,7 +34,10 @@ public class Coin implements GameElement{
 
     @Override
     public boolean collide(FoolGhost ghost) {
-        ghost.setIsCoin(true);
+        ghost.setIsNextCoin(true);
+        ghost.setIsNextCherry(false);
+        ghost.setIsNextStrawberry(false);
+        ghost.setIsNextRoad(false);
         return true;
     }
 
@@ -53,6 +56,7 @@ public class Coin implements GameElement{
     public boolean collide(Road road) {
         return true;
     }
+
 
     @Override
     public boolean collide(Coin coin) {

@@ -31,7 +31,10 @@ public class Strawberry extends Fruit implements GameElement{
 
     @Override
     public boolean collide(FoolGhost ghost) {
-        ghost.setIsStrawberry(true);
+        ghost.setIsNextStrawberry(true);
+        ghost.setIsNextCoin(false);
+        ghost.setIsNextCherry(false);
+        ghost.setIsNextRoad(false);
         return true;
     }
 
@@ -52,6 +55,8 @@ public class Strawberry extends Fruit implements GameElement{
     public boolean collide(Road road) {
         return true;
     }
+
+
 
     @Override
     public boolean collide(Coin coin) {

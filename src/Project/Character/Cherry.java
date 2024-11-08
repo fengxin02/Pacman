@@ -29,7 +29,10 @@ public class Cherry extends Fruit implements GameElement {
 
     @Override
     public boolean collide(FoolGhost ghost) {
-        ghost.setIsCherry(true);
+        ghost.setIsNextCoin(false);
+        ghost.setIsNextStrawberry(false);
+        ghost.setIsNextCherry(true);
+        ghost.setIsNextRoad(false);
         return true;
     }
 
@@ -53,6 +56,7 @@ public class Cherry extends Fruit implements GameElement {
     public boolean collide(Road road) {
         return true;
     }
+
 
     @Override
     public boolean collide(Coin coin) {

@@ -9,7 +9,6 @@ public interface GameElement {
 
     boolean collide(Cherry cherry);
     boolean collide(Road road);
-
     boolean collide(Coin coin);
     boolean checkDirec(Pacman pacman);
     void paintImage(Graphics g,int x ,int y, int cellheight, int cellwidth);

@@ -1,5 +1,6 @@
 package Project.SaveGame;
 
+import Project.Character.GameElement;
 import Project.Frame.MenuFrame;
 import Project.Layout.MenuLayout;
 import Project.Panel.GamePanel;
@@ -11,17 +12,19 @@ import java.awt.event.ActionListener;
 
 //saves the game to JSON
 public class SaveMap {
-    int[][] map;
     JFrame menu;
-    public SaveMap(int[][] map, JFrame menuFrame) {
-        this.map = map;
+    public SaveMap(GameElement[][] map, JFrame menuFrame) {
         menu = menuFrame;
+
+
 
         // save somehow
 
 
-        //end the game with first date =1000
-        map[0][0] = 1000;
+
+        //end the game with first elem be null
+        map[0][0] = null;
+
         //not a good solution to copy and paste the hole code to there, i need to write a new class
         //for Menu JPanel ini
         JPanel root = new JPanel();
