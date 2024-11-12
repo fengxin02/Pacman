@@ -113,6 +113,12 @@ public class Pacman implements GameElement{
     }
 
     @Override
+    public boolean collide(TeleportGhost ghost) {
+        isPacManAlive = false;
+        return true;
+    }
+
+    @Override
     public boolean collide(Cherry cherry) {
         return true;
     }

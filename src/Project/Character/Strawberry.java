@@ -44,6 +44,14 @@ public class Strawberry extends Fruit implements GameElement{
         return true;
     }
 
+    @Override
+    public boolean collide(TeleportGhost ghost) {
+        ghost.setIsNextStrawberry(true);
+        ghost.setIsNextCoin(false);
+        ghost.setIsNextCherry(false);
+        ghost.setIsNextRoad(false);
+        return true;
+    }
 
 
     @Override

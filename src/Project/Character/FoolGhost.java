@@ -26,27 +26,6 @@ public class FoolGhost extends Ghost implements GameElement
             throw new RuntimeException(e);
         }
     }
-
-    @Override
-    public void getPlace(int[][] map)
-    {
-
-        int id = getGhostId();
-        int idstraw = getGhostId() + 7;
-        int idcherry = getGhostId() + 4;
-        int idcoin = getGhostId() + 1;
-        for(int row = 0; row < map.length; row++)
-        {
-            for(int col = 0; col < map[row].length; col++)
-            {
-                if(map[row][col] == id || map[row][col] == idcherry || map[row][col] == idstraw || map[row][col] == idcoin )
-                {
-                    setX(col);
-                    setY(row);
-                }
-            }
-        }
-    }
     //68   = d  right
     //65   = a  left
     //87   = w  up
@@ -66,6 +45,11 @@ public class FoolGhost extends Ghost implements GameElement
     public boolean collide(Pacman pacman) {
         pacman.setIsPacManAlive(false);
         return true;
+    }
+
+    @Override
+    public boolean collide(TeleportGhost ghost) {
+        return false;
     }
 
     @Override

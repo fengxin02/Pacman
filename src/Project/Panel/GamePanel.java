@@ -21,23 +21,11 @@ public class GamePanel extends JPanel {
     private int FpsCounter = 0;
     private int[] pacmanLoc = new int[2];
     private int[] foolghostLoc = new int[2];
-    //loading images
-
-    //0 == empty road
-    //1 == coins on road
-    //2 == wall
-    //5 == pacman
-    //4  == cherry
-    //7 == strawberry
-    //20  == fool_ghost, 21 == fool ghost on coin, 27 fool ghost on strawberry, 24 == fool ghost on cherry
-    //private Ghost foolghost = new FoolGhost( 3);
-    // considering putting all 3 ghosts into an ArrayList to make the task correct
-    // need more ghost
-    // 40 == smart__ghost
-    // 50 == random__ghost
+    private int[] telepghostLoc = new int[2];
+    private GameKeyListener keylis;
 
     //random map not done yet
-    // [10][12]
+    // y[10] x[12]
     private GameElement[][] omap = new GameElement[10][12];
 
     //root
@@ -56,7 +44,7 @@ public class GamePanel extends JPanel {
         omap[1][2] = new Coin(10); omap[1][3] = new Coin(10);
         omap[1][4] = new Coin(10); omap[1][5] = new Coin(10);
         omap[1][6] = new Coin(10); omap[1][7] = new Coin(10);
-        omap[1][8] = new Coin(10); omap[1][9] = new Coin(10);
+        omap[1][8] = new Coin(10); omap[1][9] = new TeleportGhost(10,9,1);
         omap[1][10] =new Coin(10); omap[1][11] = new Wall();
 
 
@@ -144,7 +132,10 @@ public class GamePanel extends JPanel {
         pacmanLoc[1] = 6;
         foolghostLoc[0] = 7;
         foolghostLoc[1] = 5;
-        this.addKeyListener(new GameKeyListener(this, omap, menu));
+        telepghostLoc[0] = 9;
+        telepghostLoc[1] = 1;
+        keylis = new GameKeyListener(this, omap, menu);
+        this.addKeyListener(keylis);
         //make sure panel focused
         //root
         this.requestFocusInWindow();
@@ -188,6 +179,9 @@ public class GamePanel extends JPanel {
     {
         int x = pacmanLoc[0];
         int y = pacmanLoc[1];
+        if(x == -1 && y == -1){
+            return;
+        }
         int pacdirec = omap[y][x].getDirection();
         //68   = d  right
         //65   = a  left
@@ -244,6 +238,7 @@ public class GamePanel extends JPanel {
     //the game runs here
     public void startGame()
     {
+
         gameTimer = new Timer(400, new ActionListener() {
 
             @Override
@@ -257,7 +252,7 @@ public class GamePanel extends JPanel {
                 //check if game ends, if there is no more coin, you win
                 int x = pacmanLoc[0];
                 int y = pacmanLoc[1];
-                if(omap[y][x].getPoint() == 820)
+                if(omap[y][x].getPoint() == 810)
                 {
                     System.out.println("You WIN!");
                     gameTimer.stop();
@@ -288,15 +283,23 @@ public class GamePanel extends JPanel {
                     System.out.println(omap[y][x].getDirection());
                     System.out.println();
                 }
+                //fool ghost move turn
                 int fx = foolghostLoc[0];
                 int fy = foolghostLoc[1];
                 if(FpsCounter % omap[fy][fx].getMoveDelay() == 0)
                 {
                     omap[fy][fx].move(omap, foolghostLoc);
                 }
+                int tx = telepghostLoc[0];
+                int ty = telepghostLoc[1];
+                if(FpsCounter % omap[ty][tx].getMoveDelay() == 0)
+                {
+                    omap[ty][tx].move(omap, telepghostLoc);
+                }
+                //check is pacman alive
                 x = pacmanLoc[0];
                 y = pacmanLoc[1];
-                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1])
+                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1] || pacmanLoc[0] == telepghostLoc[0] && pacmanLoc[1] == telepghostLoc[1])
                 {
                     gameTimer.stop();
                     System.out.println("GG");

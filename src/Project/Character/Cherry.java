@@ -37,10 +37,22 @@ public class Cherry extends Fruit implements GameElement {
     }
 
     @Override
+    public boolean collide(TeleportGhost ghost) {
+        ghost.setIsNextCoin(false);
+        ghost.setIsNextStrawberry(false);
+        ghost.setIsNextCherry(true);
+        ghost.setIsNextRoad(false);
+        return true;
+    }
+
+    @Override
     public boolean collide(Pacman pacman) {
         pacman.addPoints(this.getScore());
         return true;
     }
+
+
+
     @Override
     public boolean checkDirec(Pacman pacman) {
         return true;

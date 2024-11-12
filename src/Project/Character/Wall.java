@@ -35,6 +35,11 @@ public class Wall implements GameElement {
     }
 
     @Override
+    public boolean collide(TeleportGhost ghost) {
+        return false;
+    }
+
+    @Override
     public boolean collide(Cherry cherry) {
         return false;
     }
