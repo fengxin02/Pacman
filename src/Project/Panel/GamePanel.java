@@ -1,12 +1,17 @@
 package Project.Panel;
 
 import Project.Character.*;
+import Project.Frame.MenuFrame;
+import Project.Layout.GameOverLayout;
+import Project.Layout.MenuLayout;
 import Project.Listener.GameKeyListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static Project.Main.Main.showMenu;
 
 
 public class GamePanel extends JPanel {
@@ -24,6 +29,7 @@ public class GamePanel extends JPanel {
     private int[] telepghostLoc = new int[2];
     private GameKeyListener keylis;
 
+    private MenuFrame menu;
     //random map not done yet
     // y[10] x[12]
     private GameElement[][] omap = new GameElement[10][12];
@@ -119,8 +125,9 @@ public class GamePanel extends JPanel {
     }
 
 
-    public GamePanel(JFrame menu)
+    public GamePanel(MenuFrame menu)
     {
+        this.menu = menu;
         //add new panel to menu
         menu.add(this);
         menu.setContentPane(this);
@@ -234,6 +241,49 @@ public class GamePanel extends JPanel {
         }
     }
 
+    private void deletePanel(){
+        this.removeAll();
+        this.revalidate();
+        this.repaint();
+        menu.remove(this);
+    }
+
+    private void gameOver(String result) throws InterruptedException {
+        Thread.sleep(500);
+        deletePanel();
+        JPanel root = new JPanel();
+        menu.add(root);
+        menu.setContentPane(root);
+        root.setFocusable(true);
+        root.setLayout(new GameOverLayout());
+        root.setBackground(new Color(220,69,255));
+        menu.setVisible(true);
+        JLabel title = new JLabel(result);
+        title.setFont(new Font("Copper Black", Font.BOLD, 50));
+        title.setForeground(new Color(230,242,86));
+        JLabel score = new JLabel("   You score: " + points);
+        score.setFont(new Font("Copper Black", Font.BOLD, 30));
+        score.setForeground(new Color(255,127,80));
+
+        JButton startButton = new JButton("Back to Menu");
+        root.add(title);
+        root.add(score);
+        root.add(startButton);
+        startButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                deletePanel();
+                showMenu(menu);
+            }
+        });
+
+
+        root.revalidate();
+        root.repaint();
+
+    }
 
     //the game runs here
     public void startGame()
@@ -256,6 +306,11 @@ public class GamePanel extends JPanel {
                 {
                     System.out.println("You WIN!");
                     gameTimer.stop();
+                    try {
+                        gameOver("  You WIN!");
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     return;
                 }
                 //root
@@ -271,6 +326,11 @@ public class GamePanel extends JPanel {
                     {
                         gameTimer.stop();
                         System.out.println("GG");
+                        try {
+                            gameOver("Game Over");
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         return;
                     }
 
@@ -296,13 +356,15 @@ public class GamePanel extends JPanel {
                 {
                     omap[ty][tx].move(omap, telepghostLoc);
                 }
-                //check is pacman alive
-                x = pacmanLoc[0];
-                y = pacmanLoc[1];
                 if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1] || pacmanLoc[0] == telepghostLoc[0] && pacmanLoc[1] == telepghostLoc[1])
                 {
                     gameTimer.stop();
                     System.out.println("GG");
+                    try {
+                        gameOver("Game Over");
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     return;
                 }
                 System.out.println("YOUR POINTS :" + points);

@@ -16,6 +16,9 @@ public class MenuFrame extends JFrame
     public MenuFrame(String title)
     {
         super(title);
+    }
+    public void startSetUp()
+    {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //size setting
         setSize(500,500);
@@ -26,9 +29,7 @@ public class MenuFrame extends JFrame
 
         //Frame is visible
         setVisible(true);
-    }
-    public void startSetUp()
-    {
+
         //set black background
         root.setBackground(Color.BLACK);
 

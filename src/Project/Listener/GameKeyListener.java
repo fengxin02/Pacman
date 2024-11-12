@@ -12,8 +12,8 @@ import java.awt.event.KeyListener;
 public class GameKeyListener implements KeyListener {
     GamePanel gamePanel;
     GameElement[][] map;
-    JFrame menuFrame;
-    public GameKeyListener(GamePanel gamePanel, GameElement[][]map, JFrame menuFrame)
+    MenuFrame menuFrame;
+    public GameKeyListener(GamePanel gamePanel, GameElement[][]map, MenuFrame menuFrame)
     {
 
         this.menuFrame = menuFrame;

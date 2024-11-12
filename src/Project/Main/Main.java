@@ -7,16 +7,16 @@ import javax.swing.*;
 public class Main {
 
     //calls the menu
-    public static void showMenu()
+    public static void showMenu(MenuFrame menu)
     {
-        MenuFrame menu = new MenuFrame("PACMAN");
         menu.startSetUp();
     }
 
 
     public static void main(String[] args)
     {
-        showMenu();
+        MenuFrame menu = new MenuFrame("PACMAN");
+        showMenu(menu);
 
     }
 }
