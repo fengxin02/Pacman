@@ -43,6 +43,11 @@ public class TeleportGhost extends Ghost implements GameElement{
     }
 
     @Override
+    public boolean collide(FastGhost ghost) {
+        return false;
+    }
+
+    @Override
     public boolean collide(Cherry cherry) {
 
         return true;

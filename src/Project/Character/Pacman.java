@@ -119,6 +119,12 @@ public class Pacman implements GameElement{
     }
 
     @Override
+    public boolean collide(FastGhost ghost) {
+        isPacManAlive = false;
+        return true;
+    }
+
+    @Override
     public boolean collide(Cherry cherry) {
         return true;
     }

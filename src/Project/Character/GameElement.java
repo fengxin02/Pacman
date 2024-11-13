@@ -7,6 +7,7 @@ public interface GameElement {
     boolean collide(FoolGhost ghost);
     boolean collide(Pacman pacman);
     boolean collide(TeleportGhost ghost);
+    boolean collide(FastGhost ghost);
     boolean collide(Cherry cherry);
     boolean collide(Road road);
     boolean collide(Coin coin);

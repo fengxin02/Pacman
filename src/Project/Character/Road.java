@@ -32,6 +32,15 @@ public class Road implements GameElement{
         return true;
     }
 
+    @Override
+    public boolean collide(FastGhost ghost) {
+        ghost.setIsNextRoad(true);
+        ghost.setIsNextCoin(false);
+        ghost.setIsNextStrawberry(false);
+        ghost.setIsNextCherry(false);
+        return true;
+    }
+
 
     @Override
     public boolean collide(Cherry cherry) {

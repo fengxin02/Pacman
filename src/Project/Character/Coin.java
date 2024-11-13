@@ -57,6 +57,15 @@ public class Coin implements GameElement{
     }
 
     @Override
+    public boolean collide(FastGhost ghost) {
+        ghost.setIsNextCoin(true);
+        ghost.setIsNextCherry(false);
+        ghost.setIsNextStrawberry(false);
+        ghost.setIsNextRoad(false);
+        return true;
+    }
+
+    @Override
     public boolean collide(Cherry cherry) {
         return true;
     }

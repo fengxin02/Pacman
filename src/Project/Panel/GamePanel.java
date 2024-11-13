@@ -27,6 +27,7 @@ public class GamePanel extends JPanel {
     private int[] pacmanLoc = new int[2];
     private int[] foolghostLoc = new int[2];
     private int[] telepghostLoc = new int[2];
+    private int[] fastghostLoc = new int[2];
     private GameKeyListener keylis;
 
     private MenuFrame menu;
@@ -59,7 +60,7 @@ public class GamePanel extends JPanel {
         omap[2][2] = new Wall();         omap[2][3] = new Wall();
         omap[2][4] = new Coin(10); omap[2][5] = new Coin(10);
         omap[2][6] = new Coin(10); omap[2][7] = new Coin(10);
-        omap[2][8] = new Coin(10); omap[2][9] = new Coin(10);
+        omap[2][8] = new Coin(10); omap[2][9] = new FastGhost(1,9,2);
         omap[2][10] =new Coin(10); omap[2][11] = new Wall();
 
 
@@ -141,6 +142,8 @@ public class GamePanel extends JPanel {
         foolghostLoc[1] = 5;
         telepghostLoc[0] = 9;
         telepghostLoc[1] = 1;
+        fastghostLoc[0] = 9;
+        fastghostLoc[1] = 2;
         keylis = new GameKeyListener(this, omap, menu);
         this.addKeyListener(keylis);
         //make sure panel focused
@@ -302,7 +305,7 @@ public class GamePanel extends JPanel {
                 //check if game ends, if there is no more coin, you win
                 int x = pacmanLoc[0];
                 int y = pacmanLoc[1];
-                if(omap[y][x].getPoint() == 810)
+                if(omap[y][x].getPoint() == 800)
                 {
                     System.out.println("You WIN!");
                     gameTimer.stop();
@@ -350,13 +353,23 @@ public class GamePanel extends JPanel {
                 {
                     omap[fy][fx].move(omap, foolghostLoc);
                 }
+                //teleport ghost move turn
                 int tx = telepghostLoc[0];
                 int ty = telepghostLoc[1];
                 if(FpsCounter % omap[ty][tx].getMoveDelay() == 0)
                 {
                     omap[ty][tx].move(omap, telepghostLoc);
                 }
-                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1] || pacmanLoc[0] == telepghostLoc[0] && pacmanLoc[1] == telepghostLoc[1])
+
+                //fast ghsot move turn
+                int fastx = fastghostLoc[0];
+                int fasty = fastghostLoc[1];
+                if(FpsCounter % omap[fasty][fastx].getMoveDelay() == 0)
+                {
+                    omap[fasty][fastx].move(omap, fastghostLoc);
+                }
+
+                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1] || pacmanLoc[0] == telepghostLoc[0] && pacmanLoc[1] == telepghostLoc[1]|| pacmanLoc[0] == fastghostLoc[0] && pacmanLoc[1] == fastghostLoc[1])
                 {
                     gameTimer.stop();
                     System.out.println("GG");
