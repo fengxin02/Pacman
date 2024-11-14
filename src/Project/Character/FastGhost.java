@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class FastGhost extends Ghost implements GameElement{
 
-    private BufferedImage GhostImage;
+    private transient BufferedImage GhostImage;
 
 
     public FastGhost(int moveDelay, int x, int y) {

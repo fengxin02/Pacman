@@ -13,10 +13,10 @@ public class Pacman implements GameElement{
 
     private int points = 0;
     private int PacManMoveDelay = 1;
-    private BufferedImage PacmanRightImage;
-    private BufferedImage PacmanLeftImage;
-    private BufferedImage PacmanUpImage;
-    private BufferedImage PacmanDownImage;
+    private transient BufferedImage PacmanRightImage;
+    private transient BufferedImage PacmanLeftImage;
+    private transient BufferedImage PacmanUpImage;
+    private transient BufferedImage PacmanDownImage;
     private boolean isPacManAlive = true;
     //68   = d  right
     //65   = a  left

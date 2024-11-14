@@ -6,15 +6,18 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static Project.Main.Main.getWallImage;
+
 public class Wall implements GameElement {
 
-    private BufferedImage WallImage;
+    private transient BufferedImage WallImage;
     public Wall() {
-        try {
-            WallImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\bricks-wall.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            WallImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\bricks-wall.png"));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        WallImage = getWallImage();
     }
     @Override
     public boolean collide(Wall wall) {

@@ -14,7 +14,7 @@ import java.util.Random;
 public class FoolGhost extends Ghost implements GameElement
 {
 
-    private BufferedImage GhostImage;
+    private transient BufferedImage GhostImage;
 
     public FoolGhost( int delay, int x , int y)
     {

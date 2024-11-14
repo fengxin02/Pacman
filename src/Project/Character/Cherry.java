@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Cherry extends Fruit implements GameElement {
-    private BufferedImage CherryImage;
+    private transient BufferedImage CherryImage;
 
     public Cherry(int score) {
         super(score);

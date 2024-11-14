@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class TeleportGhost extends Ghost implements GameElement{
 
-    private BufferedImage GhostImage;
+    private transient BufferedImage GhostImage;
 
     public TeleportGhost(int moveDelay, int x, int y) {
         super(moveDelay, x, y);

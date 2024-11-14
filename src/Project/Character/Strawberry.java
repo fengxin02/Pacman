@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Strawberry extends Fruit implements GameElement{
-    private BufferedImage StrawberryImage;
+    private transient BufferedImage StrawberryImage;
 
 
     public Strawberry(int score) {

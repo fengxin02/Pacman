@@ -3,7 +3,7 @@ package Project.Listener;
 import Project.Character.GameElement;
 import Project.Frame.MenuFrame;
 import Project.Panel.GamePanel;
-import Project.SaveGame.SaveMap;
+
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -53,12 +53,11 @@ public class GameKeyListener implements KeyListener {
                 //g = save the map
             case 71:
                 //save game
-                gamePanel.removeAll();
-                gamePanel.revalidate();
-                gamePanel.repaint();
-                menuFrame.remove(gamePanel);
-
-                SaveMap s = new SaveMap(map,menuFrame);
+//                gamePanel.removeAll();
+//                gamePanel.revalidate();
+//                gamePanel.repaint();
+//                menuFrame.remove(gamePanel);
+                gamePanel.saveGameState();
             default:
                 break;
         }

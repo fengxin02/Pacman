@@ -6,18 +6,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static Project.Main.Main.getCoinImage;
+
 public class Coin implements GameElement{
     private int score;
-    private BufferedImage CoinImage;
+    private transient BufferedImage CoinImage;
 
     public Coin(int score) {
         this.score = score;
-        try {
-            CoinImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\coin.png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        CoinImage = getCoinImage();
     }
     public int getScore() {
         return score;
