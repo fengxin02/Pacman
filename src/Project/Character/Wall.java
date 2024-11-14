@@ -17,7 +17,6 @@ public class Wall implements GameElement {
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
-        WallImage = getWallImage();
     }
     @Override
     public boolean collide(Wall wall) {
@@ -66,6 +65,8 @@ public class Wall implements GameElement {
 
     @Override
     public void paintImage(Graphics g, int x, int y, int cellheight, int cellwidth) {
+        WallImage = getWallImage();
+
         g.drawImage(WallImage, x, y, cellwidth, cellheight, null);
     }
 

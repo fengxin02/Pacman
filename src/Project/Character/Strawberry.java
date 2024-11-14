@@ -6,19 +6,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static Project.Main.Main.getStrawberryImage;
+
 public class Strawberry extends Fruit implements GameElement{
     private transient BufferedImage StrawberryImage;
 
 
     public Strawberry(int score) {
         super(score);
-
-        try {
-            StrawberryImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\strawberry.png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
     @Override
     public boolean checkDirec(Pacman pacman) {
@@ -82,6 +77,8 @@ public class Strawberry extends Fruit implements GameElement{
 
     @Override
     public void paintImage(Graphics g, int x, int y, int cellheight, int cellwidth) {
+        StrawberryImage = getStrawberryImage();
+
         g.drawImage(StrawberryImage, x, y, cellwidth, cellheight, null);
     }
 

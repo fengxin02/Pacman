@@ -59,7 +59,7 @@ public class MenuFrame extends JFrame {
         leaderBoardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Leaderboard Button clicked");
+                System.out.println("Load Button clicked");
                 GameState loadedState = SaveLoadMap.loadGame("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\saved_map.json");
                 if (loadedState != null) {
                     System.out.println("Load success ");

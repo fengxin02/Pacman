@@ -6,18 +6,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static Project.Main.Main.getCherryImage;
+
 public class Cherry extends Fruit implements GameElement {
     private transient BufferedImage CherryImage;
 
     public Cherry(int score) {
         super(score);
 
-        try {
-            CherryImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\cherries.png"));
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
@@ -86,6 +83,7 @@ public class Cherry extends Fruit implements GameElement {
 
     @Override
     public void paintImage(Graphics g, int x, int y, int cellheight, int cellwidth) {
+        CherryImage = getCherryImage();
         g.drawImage(CherryImage, x, y, cellwidth, cellheight, null);
     }
 

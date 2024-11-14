@@ -14,7 +14,7 @@ public class Coin implements GameElement{
 
     public Coin(int score) {
         this.score = score;
-        CoinImage = getCoinImage();
+
     }
     public int getScore() {
         return score;
@@ -85,6 +85,7 @@ public class Coin implements GameElement{
 
     @Override
     public void paintImage(Graphics g, int x, int y, int cellheight, int cellwidth) {
+        CoinImage = getCoinImage();
         g.drawImage(CoinImage, x, y, cellwidth, cellheight, null);
     }
 

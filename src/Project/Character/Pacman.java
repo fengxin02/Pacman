@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static Project.Main.Main.*;
+
 public class Pacman implements GameElement{
     //coordinate of pacman
     private int x = 4; //4
@@ -25,14 +27,7 @@ public class Pacman implements GameElement{
     private int direction = 68;
 
     public Pacman(int x, int y) {
-        try {
-            PacmanLeftImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmanleft.png"));
-            PacmanUpImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmanup.png"));
-            PacmanDownImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmandown.png"));
-            PacmanRightImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacman.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
 
         this.x = x;
         this.y = y;
@@ -142,6 +137,10 @@ public class Pacman implements GameElement{
 
     @Override
     public void paintImage(Graphics g, int x, int y, int cellheight, int cellwidth) {
+        PacmanLeftImage = getPacmanLeftImage();
+        PacmanRightImage = getPacmanRightImage();
+        PacmanDownImage = getPacmanDownImage();
+        PacmanUpImage = getPacmanUpImage();
         if (getDirection() == 65) {
             g.drawImage(PacmanLeftImage, x, y, cellwidth, cellheight, null);
         }

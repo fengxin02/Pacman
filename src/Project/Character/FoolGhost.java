@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
+import static Project.Main.Main.getFoolGhostImage;
+
 
 /*fool ghost goes in one direction, and when it hits wall it will change its direction with a
   random number generator and randomize his direction
@@ -19,12 +21,7 @@ public class FoolGhost extends Ghost implements GameElement
     public FoolGhost( int delay, int x , int y)
     {
         super(delay,x, y);
-        try {
-            GhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\ghost.png"));
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
     //68   = d  right
     //65   = a  left
@@ -80,6 +77,7 @@ public class FoolGhost extends Ghost implements GameElement
     }
     @Override
     public void paintImage(Graphics g, int x, int y, int cellheight, int cellwidth) {
+        GhostImage = getFoolGhostImage();
         g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
     }
 

@@ -7,18 +7,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
+import static Project.Main.Main.getTeleportGhostImage;
+
 public class TeleportGhost extends Ghost implements GameElement{
 
     private transient BufferedImage GhostImage;
 
     public TeleportGhost(int moveDelay, int x, int y) {
         super(moveDelay, x, y);
-        try {
-            GhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\telepghost.png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -70,6 +66,8 @@ public class TeleportGhost extends Ghost implements GameElement{
 
     @Override
     public void paintImage(Graphics g, int x, int y, int cellheight, int cellwidth) {
+        GhostImage = getTeleportGhostImage();
+
         g.drawImage(GhostImage, x, y, cellwidth, cellheight, null);
     }
 
