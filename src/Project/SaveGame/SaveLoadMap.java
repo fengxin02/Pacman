@@ -35,7 +35,7 @@ public class SaveLoadMap {
 
     public static GameState loadGame(String filePath) {
         RuntimeTypeAdapterFactory<GameElement> gameElementAdapterFactory = RuntimeTypeAdapterFactory
-                .of(GameElement.class, "type")  // "type" 字段用来保存类型信息
+                .of(GameElement.class, "type")
                 .registerSubtype(Wall.class, "Wall")
                 .registerSubtype(FoolGhost.class, "FoolGhost")
                 .registerSubtype(FastGhost.class, "FastGhost")
@@ -48,8 +48,6 @@ public class SaveLoadMap {
 
 
 
-
-        //Gson gson = new Gson();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapterFactory(gameElementAdapterFactory)  // 注册自定义的 TypeAdapterFactory
                 .setPrettyPrinting()
@@ -63,9 +61,8 @@ public class SaveLoadMap {
     }
     public static void saveGame(GameState gameState, String filePath){
 
-        // 创建 RuntimeTypeAdapterFactory，用于保存和加载 GameElement 及其子类
         RuntimeTypeAdapterFactory<GameElement> gameElementAdapterFactory = RuntimeTypeAdapterFactory
-                .of(GameElement.class, "type")  // "type" 字段用来保存类型信息
+                .of(GameElement.class, "type")
                 .registerSubtype(Wall.class, "Wall")
                 .registerSubtype(FoolGhost.class, "FoolGhost")
                 .registerSubtype(FastGhost.class, "FastGhost")

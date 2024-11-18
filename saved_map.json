@@ -1,20 +1,20 @@
 {
-  "score": 450,
+  "score": 360,
   "pacmanLoc": [
-    3,
-    5
-  ],
-  "foolghostLoc": [
     5,
     8
   ],
+  "foolghostLoc": [
+    8,
+    5
+  ],
   "teleghostLoc": [
     1,
-    7
+    4
   ],
   "fastghostLoc": [
-    6,
-    2
+    1,
+    7
   ],
   "gameMap": [
     [
@@ -125,10 +125,158 @@
         "score": 10
       },
       {
-        "type": "FastGhost",
-        "x": 6,
-        "y": 2,
-        "ghostMoveDelay": 1,
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Road"
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Wall"
+      }
+    ],
+    [
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      }
+    ],
+    [
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "TeleportGhost",
+        "x": 1,
+        "y": 4,
+        "ghostMoveDelay": 10,
+        "eatAble": false,
+        "ghostId": 0,
+        "direction": 68,
+        "isCherry": false,
+        "isStrawberry": false,
+        "isCoin": true,
+        "isRoad": false,
+        "isNextCherry": false,
+        "isNextStrawberry": false,
+        "isNextCoin": true,
+        "isNextRoad": false
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Wall"
+      }
+    ],
+    [
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Road"
+      },
+      {
+        "type": "FoolGhost",
+        "x": 8,
+        "y": 5,
+        "ghostMoveDelay": 3,
         "eatAble": false,
         "ghostId": 0,
         "direction": 65,
@@ -150,9 +298,44 @@
         "score": 10
       },
       {
+        "type": "Wall"
+      }
+    ],
+    [
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
         "type": "Road"
       },
       {
+        "type": "Road"
+      },
+      {
+        "type": "Road"
+      },
+      {
+        "type": "Road"
+      },
+      {
+        "type": "Road"
+      },
+      {
+        "type": "Wall"
+      },
+      {
         "type": "Coin",
         "score": 10
       },
@@ -165,84 +348,26 @@
         "type": "Wall"
       },
       {
-        "type": "Coin",
-        "score": 10
+        "type": "FastGhost",
+        "x": 1,
+        "y": 7,
+        "ghostMoveDelay": 1,
+        "eatAble": false,
+        "ghostId": 0,
+        "direction": 87,
+        "isCherry": false,
+        "isStrawberry": false,
+        "isCoin": true,
+        "isRoad": false,
+        "isNextCherry": false,
+        "isNextStrawberry": false,
+        "isNextCoin": true,
+        "isNextRoad": false
       },
       {
         "type": "Coin",
         "score": 10
       },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      }
-    ],
-    [
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Wall"
-      }
-    ],
-    [
       {
         "type": "Wall"
       },
@@ -252,177 +377,59 @@
       },
       {
         "type": "Road"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Road"
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Wall"
+      }
+    ],
+    [
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      },
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "Coin",
+        "score": 10
       },
       {
         "type": "Pacman",
-        "x": 3,
-        "y": 5,
-        "points": 450,
-        "PacManMoveDelay": 1,
-        "isPacManAlive": true,
-        "direction": 68
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Wall"
-      }
-    ],
-    [
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Wall"
-      }
-    ],
-    [
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "TeleportGhost",
-        "x": 1,
-        "y": 7,
-        "ghostMoveDelay": 10,
-        "eatAble": false,
-        "ghostId": 0,
-        "direction": 68,
-        "isCherry": false,
-        "isStrawberry": false,
-        "isCoin": false,
-        "isRoad": true,
-        "isNextCherry": false,
-        "isNextStrawberry": false,
-        "isNextCoin": false,
-        "isNextRoad": true
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Wall"
-      }
-    ],
-    [
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Road"
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "Wall"
-      },
-      {
-        "type": "Coin",
-        "score": 10
-      },
-      {
-        "type": "FoolGhost",
         "x": 5,
         "y": 8,
-        "ghostMoveDelay": 3,
-        "eatAble": false,
-        "ghostId": 0,
-        "direction": 83,
-        "isCherry": false,
-        "isStrawberry": false,
-        "isCoin": false,
-        "isRoad": true,
-        "isNextCherry": false,
-        "isNextStrawberry": false,
-        "isNextCoin": false,
-        "isNextRoad": true
+        "points": 360,
+        "PacManMoveDelay": 1,
+        "isPacManAlive": true,
+        "direction": 83
       },
       {
-        "type": "Road"
+        "type": "Coin",
+        "score": 10
       },
       {
         "type": "Wall"

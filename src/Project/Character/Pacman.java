@@ -27,8 +27,6 @@ public class Pacman implements GameElement{
     private int direction = 68;
 
     public Pacman(int x, int y) {
-
-
         this.x = x;
         this.y = y;
     }
@@ -68,27 +66,6 @@ public class Pacman implements GameElement{
     {
         this.direction = direction;
     }
-
-    public void getPlace(int[][] map)
-    {
-        int i = 0;
-        int j = 0;
-        for(i = 0; i < map.length; i++)
-        {
-            for(j = 0; j < map[i].length; j++)
-            {
-                if(map[i][j] == 5)
-                {
-                    y = i;
-                    x = j;
-                    return;
-                }
-            }
-        }
-        x = -1;
-        y = -1;
-    }
-
 
 
     @Override

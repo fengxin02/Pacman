@@ -888,14 +888,7 @@ public class GamePanel extends JPanel {
         //make sure panel focused
         //root
         this.requestFocusInWindow();
-//        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-//        gd.setFullScreenWindow(menu);
         this.setBackground(Color.black);
-        //load image
-
-
-
-
     }
 
     public void saveGameState(){
