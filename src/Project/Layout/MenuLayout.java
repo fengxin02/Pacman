@@ -8,19 +8,33 @@ import java.util.ArrayList;
 public class MenuLayout extends LayoutAdapter
 {
     //stores the objects, and add to the panel
+    /**
+     * Stores Component which is added
+     */
     List<Component> lis = new ArrayList<Component>();
+    /**
+     * Add layouts
+     * @param comp the component to be added
+     * @param constraints  where/how the component is added to the layout.
+     */
     @Override
     public void addLayoutComponent(Component comp, Object constraints)
     {
         lis.add(comp);
     }
-
+    /**
+     * remove layout
+     * @param comp the component to be removed
+     */
     @Override
     public void removeLayoutComponent(Component comp)
     {
      lis.remove(comp);
     }
-
+    /**
+     * set the layout
+     * @param parent the container to be laid out
+     */
     @Override
     public void layoutContainer(Container parent)
     {

@@ -62,12 +62,19 @@ public class Main {
     }
 
     //calls the menu
+
+    /**
+     * Start up the menu
+     * @param menu
+     */
     public static void showMenu(MenuFrame menu)
     {
         menu.startSetUp();
     }
 
-
+    /**
+     * Load All Images
+     */
     public static void loadImage(){
         try {
             TeleportGhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\telepghost.png"));

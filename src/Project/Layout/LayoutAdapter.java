@@ -4,6 +4,7 @@ import java.awt.*;
 //use for not overriding all the methods in LayoutManager
 public abstract class LayoutAdapter implements LayoutManager2
 {
+
     @Override
     public void addLayoutComponent(String name, Component comp) {}
 

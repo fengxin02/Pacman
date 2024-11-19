@@ -12,12 +12,18 @@ import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame {
     //root panel
+    /**
+     * Root Panel
+     */
     JPanel root = new JPanel();
 
     public MenuFrame(String title) {
         super(title);
     }
 
+    /**
+     * Set up the Frame
+     */
     public void startSetUp() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //size setting
@@ -88,7 +94,9 @@ public class MenuFrame extends JFrame {
 
     }
 
-
+    /**
+     * Initialize the game panel
+     */
     public void gamePanelIni() {
         //removes the buttons and labels in the panel
         root.removeAll();
@@ -107,6 +115,10 @@ public class MenuFrame extends JFrame {
         });
     }
 
+    /**
+     * Initialize the Game panel with gameState
+     * @param gameState saved game
+     */
     public void gamePanelIni(GameState gameState) {
         //removes the buttons and labels in the panel
         root.removeAll();

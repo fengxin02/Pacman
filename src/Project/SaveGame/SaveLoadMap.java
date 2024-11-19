@@ -23,16 +23,12 @@ import static Project.Main.Main.showMenu;
 //saves the game to JSON
 public class SaveLoadMap {
     private MenuFrame menu;
-//    public SaveMap(GameState gs, GameElement[][] map, MenuFrame menuFrame) {
-//        menu = menuFrame;
-//        // save somehow
-//
-//        //end the game with first elem be null
-//        map[0][0] = null;
-//        showMenu(menu);
-//
-//    }
 
+    /**
+     * Load the game from json
+     * @param filePath where the saved game is
+     * @return Saved game stats
+     */
     public static GameState loadGame(String filePath) {
         RuntimeTypeAdapterFactory<GameElement> gameElementAdapterFactory = RuntimeTypeAdapterFactory
                 .of(GameElement.class, "type")
@@ -59,6 +55,12 @@ public class SaveLoadMap {
             return null;
         }
     }
+
+    /**
+     * Save the current game
+     * @param gameState current game stats
+     * @param filePath where to save the game
+     */
     public static void saveGame(GameState gameState, String filePath){
 
         RuntimeTypeAdapterFactory<GameElement> gameElementAdapterFactory = RuntimeTypeAdapterFactory
@@ -73,9 +75,6 @@ public class SaveLoadMap {
                 .registerSubtype(Strawberry.class, "Strawberry")
                 .registerSubtype(Road.class, "Road");
 
-
-
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapterFactory(gameElementAdapterFactory)  // 注册自定义的 TypeAdapterFactory
                 .setPrettyPrinting()

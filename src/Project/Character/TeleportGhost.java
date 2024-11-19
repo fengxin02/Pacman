@@ -10,60 +10,106 @@ import java.util.Random;
 import static Project.Main.Main.getTeleportGhostImage;
 
 public class TeleportGhost extends Ghost implements GameElement{
-
+    /**
+     * Image of Teleport Ghost
+     */
     private transient BufferedImage GhostImage;
 
     public TeleportGhost(int moveDelay, int x, int y) {
         super(moveDelay, x, y);
     }
-
+    /**
+     * Wall collide to implemented object
+     * @param wall
+     * @return Moveable or not
+     */
     @Override
     public boolean collide(Wall wall) {
         return false;
     }
-
+    /**
+     * Fool Ghost collide to implemented object
+     * @param ghost
+     * @return Moveable or not
+     */
     @Override
     public boolean collide(FoolGhost ghost) {
         return false;
     }
-
+    /**
+     * Pacman collide to implemented object
+     * @param pacman
+     * @return Moveable or not
+     */
     @Override
     public boolean collide(Pacman pacman) {
         pacman.setIsPacManAlive(false);
         return true;
     }
-
+    /**
+     * Teleport Ghost collide to implemented object
+     * @param ghost
+     * @return Moveable or not
+     */
     @Override
     public boolean collide(TeleportGhost ghost) {
         return false;
     }
-
+    /**
+     * Fast Ghost collide to implemented object
+     * @param ghost
+     * @return Moveable or not
+     */
     @Override
     public boolean collide(FastGhost ghost) {
         return false;
     }
-
+    /**
+     * Cherry collide to implemented object
+     * @param cherry
+     * @return Moveable or not
+     */
     @Override
     public boolean collide(Cherry cherry) {
 
         return true;
     }
-
+    /**
+     * Road collide to implemented object
+     * @param road
+     * @return Moveable
+     */
     @Override
     public boolean collide(Road road) {
         return true;
     }
 
-
+    /**
+     * Coin collide to implemented object
+     * @param coin
+     * @return Moveable or not
+     */
     @Override
     public boolean collide(Coin coin) {
         return true;
     }
+    /**
+     * Check if Pacman can change direction
+     * @param pacman pacman
+     * @return if Pacman can change direction
+     */
     @Override
     public boolean checkDirec(Pacman pacman) {
         return true;
     }
-
+    /**
+     * Draw Teleport Ghost picture
+     * @param g Graphics
+     * @param x x coordinate where to draw
+     * @param y y coordinate where to draw
+     * @param cellheight
+     * @param cellwidth
+     */
     @Override
     public void paintImage(Graphics g, int x, int y, int cellheight, int cellwidth) {
         GhostImage = getTeleportGhostImage();
@@ -80,7 +126,11 @@ public class TeleportGhost extends Ghost implements GameElement{
     public int getMoveDelay() {
         return getGhostMoveDelay();
     }
-
+    /**
+     * object moves
+     * @param omap game map
+     * @param coordinate object coordinates
+     */
     @Override
     public void move(GameElement[][] omap, int[] coordinate) {
         int x = this.getX();

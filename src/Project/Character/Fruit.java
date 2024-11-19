@@ -1,6 +1,9 @@
 package Project.Character;
 
 public class Fruit {
+    /**
+     * The value of the Fruit
+     */
     private int score;
     public Fruit() {
     }

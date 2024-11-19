@@ -2,13 +2,34 @@ package Project.SaveGame;
 
 import Project.Character.GameElement;
 
+/**
+ * For saving the game
+ */
 public class GameState {
-
+    /**
+     * Score
+     */
     private int score;
+    /**
+     * Location of the Pacman
+     */
     private int[] pacmanLoc;
+    /**
+     * Location of the Fool Ghost
+     */
     private int[] foolghostLoc;
+    /**
+     * Location of the Teleport Ghost
+     */
     private int[] teleghostLoc;
+    /**
+     * Location of the Fast Ghost
+     */
     private int[] fastghostLoc;
+
+    /**
+     * Game map
+     */
     private GameElement[][] gameMap;
 
     public int getScore() {

@@ -10,8 +10,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameKeyListener implements KeyListener {
+    /**
+     * Main game panel
+     */
     GamePanel gamePanel;
+    /**
+     * Game map
+     */
     GameElement[][] map;
+    /**
+     * Menu main frame
+     */
     MenuFrame menuFrame;
     public GameKeyListener(GamePanel gamePanel, GameElement[][]map, MenuFrame menuFrame)
     {
@@ -26,6 +35,10 @@ public class GameKeyListener implements KeyListener {
 
     }
 
+    /**
+     * Return the pressed key and set the direction of Pacman
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
@@ -48,15 +61,8 @@ public class GameKeyListener implements KeyListener {
             case 68:
                 gamePanel.setDirection(68);
                 break;
-            
-                //bullshit delete this
-                //g = save the map
             case 71:
                 //save game
-//                gamePanel.removeAll();
-//                gamePanel.revalidate();
-//                gamePanel.repaint();
-//                menuFrame.remove(gamePanel);
                 gamePanel.saveGameState();
             default:
                 break;

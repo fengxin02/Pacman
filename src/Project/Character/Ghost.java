@@ -3,27 +3,53 @@ package Project.Character;
 //ghost eatable feature not done
 
 public abstract class Ghost {
+    /**
+     * X coordinate of the Ghost
+     */
     private int x = -1;
+    /**
+     * Y coordinate of the Ghost
+     */
     private int y = -1;
+    /**
+     * Move Delay of the Ghost
+     */
     private int ghostMoveDelay;
-    private boolean eatAble = false;
-    private int ghostId;
+    /**
+     * Direction of the Ghost
+     */
     private int direction = 68;
+    /**
+     * Was cherry under Ghost
+     */
     private boolean isCherry = false;
+    /**
+     * Was strawberry under Ghost
+     */
     private boolean isStrawberry = false;
+    /**
+     * Was coin under Ghost
+     */
     private boolean isCoin = false;
-    //68   = d  right
-    //65   = a  left
-    //87   = w  up
-    //83   = s  down
+    /**
+     * Was road under Ghost
+     */
     private boolean isRoad = true;
+    /**
+     * Is next cherry
+     */
     private boolean isNextCherry = false;
+    /**
+     * Is next strawberry
+     */
     private boolean isNextStrawberry = false;
+    /**
+     * Is next coin
+     */
     private boolean isNextCoin = false;
-    //68   = d  right
-    //65   = a  left
-    //87   = w  up
-    //83   = s  down
+    /**
+     * Is next road
+     */
     private boolean isNextRoad = false;
     public void setIsNextRoad(boolean isRoad) {
         this.isNextRoad = isRoad;
@@ -83,21 +109,17 @@ public abstract class Ghost {
     public void setIsStrawberry(boolean isStrawberry) {
         this.isStrawberry = isStrawberry;
     }
-    public void setEatAble(boolean eatAble) {
-        this.eatAble = eatAble;
-    }
 
+    /**
+     * Constructor
+     * @param moveDelay
+     * @param x
+     * @param y
+     */
     public Ghost( int moveDelay, int x, int y) {
         ghostMoveDelay = moveDelay;
         this.x = x;
         this.y = y;
-    }
-
-    public void getPlace(int[][] map) {}
-
-    public int getGhostId() {
-
-        return ghostId;
     }
 
     public void setX(int x) {
@@ -127,7 +149,6 @@ public abstract class Ghost {
     public void setDirection(int direction) {
         this.direction = direction;
     }
-
     public void move(int[][] map) {
     }
 

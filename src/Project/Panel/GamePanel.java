@@ -3,7 +3,6 @@ package Project.Panel;
 import Project.Character.*;
 import Project.Frame.MenuFrame;
 import Project.Layout.GameOverLayout;
-import Project.Layout.MenuLayout;
 import Project.Listener.GameKeyListener;
 import Project.SaveGame.GameState;
 import Project.SaveGame.SaveLoadMap;
@@ -19,23 +18,46 @@ import static Project.Main.Main.showMenu;
 
 public class GamePanel extends JPanel {
 
-    //score
+    /**
+     * Score
+     */
     private int points = 0;
-    //pacman
-    //private Pacman pacman = new Pacman(4,6);
+    /**
+     * Game timer thread where game runs
+     */
     private Timer gameTimer;
-
-    //calculate the fps for the movement speed
+    /**
+     * For calculation characters movement speed
+     */
     private int FpsCounter = 0;
+    /**
+     * Location of the Pacman
+     */
     private int[] pacmanLoc = new int[2];
+    /**
+     * Location of the Fool Ghost
+     */
     private int[] foolghostLoc = new int[2];
+    /**
+     * Location of the Teleport Ghost
+     */
     private int[] telepghostLoc = new int[2];
+    /**
+     * Location of the Fast Ghost
+     */
     private int[] fastghostLoc = new int[2];
+    /**
+     * Key Listener
+     */
     private GameKeyListener keylis;
-
+    /**
+     * Main frame
+     */
     private MenuFrame menu;
-    //random map not done yet
     // y[10] x[12]
+    /**
+     * Game map
+     */
     private GameElement[][] omap = new GameElement[10][12];
     //private GameElement[][] omap = new GameElement[21][33];
 
@@ -738,9 +760,10 @@ public class GamePanel extends JPanel {
     }
 
 
-
-
-    //root
+    /**
+     * Initialize the game map with Game elements
+     * @param omap
+     */
     public void iniMap(GameElement[][] omap){
         //first row
         omap[0][0] = new Wall(); omap[0][1] = new Wall();
@@ -885,12 +908,13 @@ public class GamePanel extends JPanel {
 
         keylis = new GameKeyListener(this, omap, menu);
         this.addKeyListener(keylis);
-        //make sure panel focused
-        //root
         this.requestFocusInWindow();
         this.setBackground(Color.black);
     }
 
+    /**
+     * Save the game to json
+     */
     public void saveGameState(){
         GameState gameState = new GameState();
         gameState.setScore(points);
@@ -908,7 +932,10 @@ public class GamePanel extends JPanel {
         showMenu(menu);
     }
 
-
+    /**
+     * Draw the game
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -933,6 +960,10 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Check the direction of Pacman
+     * @param direc
+     */
     public void setDirection(int direc)
     {
         int x = pacmanLoc[0];
@@ -992,6 +1023,9 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Remove all from this Panel
+     */
     private void deletePanel(){
         this.removeAll();
         this.revalidate();
@@ -999,6 +1033,11 @@ public class GamePanel extends JPanel {
         menu.remove(this);
     }
 
+    /**
+     * Game end panel
+     * @param result score
+     * @throws InterruptedException
+     */
     private void gameOver(String result) throws InterruptedException {
         Thread.sleep(500);
         deletePanel();
@@ -1037,6 +1076,10 @@ public class GamePanel extends JPanel {
     }
 
     //the game runs here
+
+    /**
+     * Where the game runs
+     */
     public void startGame()
     {
         gameTimer = new Timer(400, new ActionListener() {
