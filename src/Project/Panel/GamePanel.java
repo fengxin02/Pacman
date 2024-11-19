@@ -1087,14 +1087,40 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1] || pacmanLoc[0] == telepghostLoc[0] && pacmanLoc[1] == telepghostLoc[1]|| pacmanLoc[0] == fastghostLoc[0] && pacmanLoc[1] == fastghostLoc[1])
+                {
+                    gameTimer.stop();
+                    System.out.println("GG");
+                    try {
+                        gameOver("Game Over");
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    return;
+                }
+                int x = pacmanLoc[0];
+                int y = pacmanLoc[1];
+                if (x == -1 && y == -1) {
+                    repaint();
+                    gameTimer.stop();
+                    System.out.println("GG");
+                    try {
+                        gameOver("Game Over");
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    return;
+                }
+
+
                 //when map is saved the first elem will be null
                 if(omap[0][0] == null)
                 {
                     gameTimer.stop();
                 }
                 //check if game ends, if there is no more coin, you win
-                int x = pacmanLoc[0];
-                int y = pacmanLoc[1];
+                 x = pacmanLoc[0];
+                  y = pacmanLoc[1];
                 if(omap[y][x].getPoint() == 800) //6520
                 {
                     System.out.println("You WIN!");
@@ -1110,66 +1136,68 @@ public class GamePanel extends JPanel {
                 revalidate();
                 repaint();
 
-                //makes pacman moves slower
-                if (FpsCounter % omap[y][x].getMoveDelay() == 0) {
-                    omap[y][x].move(omap, pacmanLoc);
-                    x = pacmanLoc[0];
-                    y = pacmanLoc[1];
-                    if (x == -1 && y == -1)
-                    {
-                        gameTimer.stop();
-                        System.out.println("GG");
-                        try {
-                            gameOver("Game Over");
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
+
+
+                    //makes pacman moves slower
+                    if (FpsCounter % omap[y][x].getMoveDelay() == 0) {
+                        omap[y][x].move(omap, pacmanLoc);
+                        x = pacmanLoc[0];
+                        y = pacmanLoc[1];
+                        if (x == -1 && y == -1) {
+//                        repaint();
+//                        gameTimer.stop();
+//                        System.out.println("GG");
+//                        try {
+//                            gameOver("Game Over");
+//                        } catch (InterruptedException ex) {
+//                            throw new RuntimeException(ex);
+//                        }
+//                        return;
+                        } else {
+                            if (omap[y][x].getPoint() > points) {
+
+                                points = omap[y][x].getPoint();
+                            }
                         }
-                        return;
+                        //printMap(map);
                     }
 
-                    if(omap[y][x].getPoint() > points){
-
-                        points = omap[y][x].getPoint();
+                x = pacmanLoc[0];
+                y = pacmanLoc[1];
+                //if pacman is dead ghost will not  move and wait till next repaint
+                if(!(x == -1 && y == -1)) {
+                    //fool ghost move turn
+                    int fx = foolghostLoc[0];
+                    int fy = foolghostLoc[1];
+                    if (FpsCounter % omap[fy][fx].getMoveDelay() == 0) {
+                        omap[fy][fx].move(omap, foolghostLoc);
                     }
-                    //printMap(map);
-                    System.out.println();
-                    System.out.println(omap[y][x].getDirection());
-                    System.out.println();
-                }
-                //fool ghost move turn
-                int fx = foolghostLoc[0];
-                int fy = foolghostLoc[1];
-                if(FpsCounter % omap[fy][fx].getMoveDelay() == 0)
-                {
-                    omap[fy][fx].move(omap, foolghostLoc);
-                }
-                //teleport ghost move turn
-                int tx = telepghostLoc[0];
-                int ty = telepghostLoc[1];
-                if(FpsCounter % omap[ty][tx].getMoveDelay() == 0)
-                {
-                    omap[ty][tx].move(omap, telepghostLoc);
-                }
-
-                //fast ghsot move turn
-                int fastx = fastghostLoc[0];
-                int fasty = fastghostLoc[1];
-                if(FpsCounter % omap[fasty][fastx].getMoveDelay() == 0)
-                {
-                    omap[fasty][fastx].move(omap, fastghostLoc);
-                }
-
-                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1] || pacmanLoc[0] == telepghostLoc[0] && pacmanLoc[1] == telepghostLoc[1]|| pacmanLoc[0] == fastghostLoc[0] && pacmanLoc[1] == fastghostLoc[1])
-                {
-                    gameTimer.stop();
-                    System.out.println("GG");
-                    try {
-                        gameOver("Game Over");
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
+                    //teleport ghost move turn
+                    int tx = telepghostLoc[0];
+                    int ty = telepghostLoc[1];
+                    if (FpsCounter % omap[ty][tx].getMoveDelay() == 0) {
+                        omap[ty][tx].move(omap, telepghostLoc);
                     }
-                    return;
+
+                    //fast ghsot move turn
+                    int fastx = fastghostLoc[0];
+                    int fasty = fastghostLoc[1];
+                    if (FpsCounter % omap[fasty][fastx].getMoveDelay() == 0) {
+                        omap[fasty][fastx].move(omap, fastghostLoc);
+                    }
                 }
+
+//                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1] || pacmanLoc[0] == telepghostLoc[0] && pacmanLoc[1] == telepghostLoc[1]|| pacmanLoc[0] == fastghostLoc[0] && pacmanLoc[1] == fastghostLoc[1])
+//                {
+//                    gameTimer.stop();
+//                    System.out.println("GG");
+//                    try {
+//                        gameOver("Game Over");
+//                    } catch (InterruptedException ex) {
+//                        throw new RuntimeException(ex);
+//                    }
+//                    return;
+//                }
                 System.out.println("YOUR POINTS :" + points);
 
                 FpsCounter++;

@@ -245,6 +245,7 @@ public class Pacman implements GameElement{
                     coordinate[0] = x+1;
                 }
                 else{
+                    map[y][x] = new Road();
                     coordinate[0] = -1;
                     coordinate[1] = -1;
                 }
@@ -264,6 +265,7 @@ public class Pacman implements GameElement{
                     coordinate[0] = x-1;
                 }
                 else{
+                    map[y][x] = new Road();
                     coordinate[0] = -1;
                     coordinate[1] = -1;
                 }
@@ -283,6 +285,7 @@ public class Pacman implements GameElement{
                     coordinate[1] = y-1;
                 }
                 else{
+                    map[y][x] = new Road();
                     coordinate[0] = -1;
                     coordinate[1] = -1;
                 }
@@ -302,6 +305,7 @@ public class Pacman implements GameElement{
                     coordinate[1] = y+1;
                 }
                 else{
+                    map[y][x] = new Road();
                     coordinate[0] = -1;
                     coordinate[1] = -1;
                 }
