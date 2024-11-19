@@ -64,7 +64,6 @@ public class SaveLoadTest {
     }
     @Test
     public void testSaveGame() {
-
         saveGame(gameState,"C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\testsave.json");
     }
     @Test
@@ -78,12 +77,22 @@ public class SaveLoadTest {
         assertArrayEquals(load.getFoolghostLoc(),gameState.getFoolghostLoc());
         assertArrayEquals(load.getFastghostLoc(),gameState.getFastghostLoc());
         assertArrayEquals(load.getTeleghostLoc(),gameState.getTeleghostLoc());
+        GameElement[][] actualMap = load.getGameMap();
+
+        assertInstanceOf(Wall.class, actualMap[0][0]);
+        assertInstanceOf(FoolGhost.class, actualMap[0][1]);
+
+        assertInstanceOf(Pacman.class, actualMap[1][0]);
+        assertInstanceOf(TeleportGhost.class, actualMap[1][1]);
+
+        assertInstanceOf(FastGhost.class, actualMap[2][0]);
+        assertInstanceOf(Coin.class, actualMap[2][1]);
+
+        assertInstanceOf(Strawberry.class, actualMap[3][0]);
+        assertInstanceOf(Cherry.class, actualMap[3][1]);
+
+        assertInstanceOf(Road.class, actualMap[4][0]);
+        assertInstanceOf(Wall.class, actualMap[4][1]);
     }
 
-
-    @AfterAll
-    public static void tearDown() throws IOException {
-        Path p = Paths.get("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\testsave.json");
-        Files.delete(p);
-    }
 }
