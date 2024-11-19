@@ -1,0 +1,106 @@
+{
+  "score": 10,
+  "pacmanLoc": [
+    0,
+    1
+  ],
+  "foolghostLoc": [
+    1,
+    0
+  ],
+  "teleghostLoc": [
+    1,
+    1
+  ],
+  "fastghostLoc": [
+    0,
+    2
+  ],
+  "gameMap": [
+    [
+      {
+        "type": "Wall"
+      },
+      {
+        "type": "FoolGhost",
+        "x": 1,
+        "y": 0,
+        "ghostMoveDelay": 2,
+        "direction": 68,
+        "isCherry": false,
+        "isStrawberry": false,
+        "isCoin": false,
+        "isRoad": true,
+        "isNextCherry": false,
+        "isNextStrawberry": false,
+        "isNextCoin": false,
+        "isNextRoad": false
+      }
+    ],
+    [
+      {
+        "type": "Pacman",
+        "x": 0,
+        "y": 1,
+        "points": 0,
+        "PacManMoveDelay": 1,
+        "isPacManAlive": true,
+        "direction": 68
+      },
+      {
+        "type": "TeleportGhost",
+        "x": 1,
+        "y": 1,
+        "ghostMoveDelay": 5,
+        "direction": 68,
+        "isCherry": false,
+        "isStrawberry": false,
+        "isCoin": false,
+        "isRoad": true,
+        "isNextCherry": false,
+        "isNextStrawberry": false,
+        "isNextCoin": false,
+        "isNextRoad": false
+      }
+    ],
+    [
+      {
+        "type": "FastGhost",
+        "x": 0,
+        "y": 2,
+        "ghostMoveDelay": 10,
+        "direction": 68,
+        "isCherry": false,
+        "isStrawberry": false,
+        "isCoin": false,
+        "isRoad": true,
+        "isNextCherry": false,
+        "isNextStrawberry": false,
+        "isNextCoin": false,
+        "isNextRoad": false
+      },
+      {
+        "type": "Coin",
+        "score": 10
+      }
+    ],
+    [
+      {
+        "type": "Strawberry",
+        "score": 10
+      },
+      {
+        "type": "Cherry",
+        "score": 100
+      }
+    ],
+    [
+      {
+        "type": "Road"
+      },
+      {
+        "type": "Wall"
+      }
+    ]
+  ]
+}
