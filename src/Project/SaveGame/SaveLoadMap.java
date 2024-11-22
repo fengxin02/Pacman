@@ -2,14 +2,6 @@ package Project.SaveGame;
 
 import Project.Character.*;
 import Project.Frame.MenuFrame;
-import Project.Layout.MenuLayout;
-import Project.Panel.GamePanel;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +9,6 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
-import static Project.Main.Main.showMenu;
 
 
 //saves the game to JSON

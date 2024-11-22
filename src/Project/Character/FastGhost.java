@@ -1,10 +1,8 @@
 package Project.Character;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.Random;
 
 import static Project.Main.Main.getFastGhostImage;

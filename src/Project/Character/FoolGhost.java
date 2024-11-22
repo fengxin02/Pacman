@@ -1,17 +1,16 @@
 package Project.Character;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.Random;
 
 import static Project.Main.Main.getFoolGhostImage;
 
 
-/*fool ghost goes in one direction, and when it hits wall it will change its direction with a
-  random number generator and randomize his direction
+/**
+ * fool ghost goes in one direction, and when it hits wall it will change its direction with a
+ *random number generator and randomize his direction
  */
 public class FoolGhost extends Ghost implements GameElement
 {
@@ -28,7 +27,7 @@ public class FoolGhost extends Ghost implements GameElement
     //68   = d  right
     //65   = a  left
     //87   = w  up
-//    //83   = s  down
+    //83   = s  down
     /**
      * Wall collide to implemented object
      * @param wall

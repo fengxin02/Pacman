@@ -104,8 +104,6 @@ public class MenuFrame extends JFrame {
         root.repaint();
         this.remove(root);
         GamePanel game = new GamePanel(this);
-        //this.setSize(800,600);
-        //this.setLocation(0,0);
         //check if everything is done
         SwingUtilities.invokeLater(new Runnable() {
             @Override

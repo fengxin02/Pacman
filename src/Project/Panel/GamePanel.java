@@ -762,7 +762,7 @@ public class GamePanel extends JPanel {
 
     /**
      * Initialize the game map with Game elements
-     * @param omap
+     * @param omap game map
      */
     public void iniMap(GameElement[][] omap){
         //first row
@@ -779,7 +779,7 @@ public class GamePanel extends JPanel {
         omap[1][2] = new Coin(10); omap[1][3] = new Coin(10);
         omap[1][4] = new Coin(10); omap[1][5] = new Coin(10);
         omap[1][6] = new Coin(10); omap[1][7] = new Coin(10);
-        omap[1][8] = new Coin(10); omap[1][9] = new TeleportGhost(10,9,1);
+        omap[1][8] = new Strawberry(100); omap[1][9] = new TeleportGhost(10,9,1);
         omap[1][10] =new Coin(10); omap[1][11] = new Wall();
 
 
@@ -822,7 +822,7 @@ public class GamePanel extends JPanel {
         omap[6][0] = new Wall();            omap[6][1] = new Coin(10);
         omap[6][2] = new Coin(10);    omap[6][3] = new Coin(10);
         omap[6][4] = new Pacman(4,6); omap[6][5] = new Coin(10);
-        omap[6][6] = new Coin(10);    omap[6][7] = new Strawberry(100);
+        omap[6][6] = new Coin(10);    omap[6][7] = new Coin(10);
         omap[6][8] = new Cherry(200); omap[6][9] = new Wall();
         omap[6][10] =new Coin(10);    omap[6][11] = new Wall();
 
@@ -1144,15 +1144,6 @@ public class GamePanel extends JPanel {
                         x = pacmanLoc[0];
                         y = pacmanLoc[1];
                         if (x == -1 && y == -1) {
-//                        repaint();
-//                        gameTimer.stop();
-//                        System.out.println("GG");
-//                        try {
-//                            gameOver("Game Over");
-//                        } catch (InterruptedException ex) {
-//                            throw new RuntimeException(ex);
-//                        }
-//                        return;
                         } else {
                             if (omap[y][x].getPoint() > points) {
 
@@ -1186,18 +1177,6 @@ public class GamePanel extends JPanel {
                         omap[fasty][fastx].move(omap, fastghostLoc);
                     }
                 }
-
-//                if (pacmanLoc[0] == foolghostLoc[0] && pacmanLoc[1] == foolghostLoc[1] || pacmanLoc[0] == telepghostLoc[0] && pacmanLoc[1] == telepghostLoc[1]|| pacmanLoc[0] == fastghostLoc[0] && pacmanLoc[1] == fastghostLoc[1])
-//                {
-//                    gameTimer.stop();
-//                    System.out.println("GG");
-//                    try {
-//                        gameOver("Game Over");
-//                    } catch (InterruptedException ex) {
-//                        throw new RuntimeException(ex);
-//                    }
-//                    return;
-//                }
                 System.out.println("YOUR POINTS :" + points);
 
                 FpsCounter++;
