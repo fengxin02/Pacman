@@ -66,7 +66,7 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Load Button clicked");
-                GameState loadedState = SaveLoadMap.loadGame("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\saved_map.json");
+                GameState loadedState = SaveLoadMap.loadGame("saved_map.json");
                 if (loadedState != null) {
                     System.out.println("Load success ");
                 }

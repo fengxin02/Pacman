@@ -923,7 +923,7 @@ public class GamePanel extends JPanel {
         gameState.setTeleghostLoc(telepghostLoc);
         gameState.setFastghostLoc(fastghostLoc);
         gameState.setGameMap(omap);
-        SaveLoadMap.saveGame(gameState,"C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\saved_map.json");
+        SaveLoadMap.saveGame(gameState,"saved_map.json");
         omap[0][0] = null;
         this.removeAll();
         this.revalidate();

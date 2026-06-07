@@ -76,52 +76,19 @@ public class Main {
      * Load All Images
      */
     public static void loadImage(){
+        String resPath = "src/Project/res/";
         try {
-            TeleportGhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\telepghost.png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-             CoinImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\coin.png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            WallImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\bricks-wall.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            CherryImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\cherries.png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            FastGhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\fastghost.png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            FoolGhostImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\ghost.png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            PacmanLeftImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmanleft.png"));
-            PacmanUpImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmanup.png"));
-            PacmanDownImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacmandown.png"));
-            PacmanRightImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\pacman.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            StrawberryImage = ImageIO.read(new File("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\src\\Project\\res\\strawberry.png"));
-
+            TeleportGhostImage = ImageIO.read(new File(resPath + "telepghost.png"));
+            CoinImage = ImageIO.read(new File(resPath + "coin.png"));
+            WallImage = ImageIO.read(new File(resPath + "bricks-wall.png"));
+            CherryImage = ImageIO.read(new File(resPath + "cherries.png"));
+            FastGhostImage = ImageIO.read(new File(resPath + "fastghost.png"));
+            FoolGhostImage = ImageIO.read(new File(resPath + "ghost.png"));
+            PacmanLeftImage = ImageIO.read(new File(resPath + "pacmanleft.png"));
+            PacmanUpImage = ImageIO.read(new File(resPath + "pacmanup.png"));
+            PacmanDownImage = ImageIO.read(new File(resPath + "pacmandown.png"));
+            PacmanRightImage = ImageIO.read(new File(resPath + "pacman.png"));
+            StrawberryImage = ImageIO.read(new File(resPath + "strawberry.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

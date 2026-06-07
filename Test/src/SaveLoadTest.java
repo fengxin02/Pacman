@@ -64,11 +64,11 @@ public class SaveLoadTest {
     }
     @Test
     public void testSaveGame() {
-        saveGame(gameState,"C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\testsave.json");
+        saveGame(gameState,"testsave.json");
     }
     @Test
     public void testLoadGame() {
-        GameState load = SaveLoadMap.loadGame("C:\\Users\\fengx\\Desktop\\BMEschool\\prog3\\Nagy_hazi\\Pacman\\testsave.json");
+        GameState load = SaveLoadMap.loadGame("testsave.json");
         if(load == null){
             System.out.println("failed");
         }
