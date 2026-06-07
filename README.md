@@ -1,6 +1,8 @@
 # Pac-Man
 
-A fully functional Pac-Man game with a graphical user interface, developed in Java as part of the BME "Fundamentals of Programming 3" course.
+A fully functional Pac-Man game with a graphical user interface, developed in Java as part of the BME "Programming 3" course.
+
+<img width="486" height="493" alt="image" src="https://github.com/user-attachments/assets/fb323d1b-0068-4270-bfb4-63cca23eb5f4" />
 
 ## About the Game
 
