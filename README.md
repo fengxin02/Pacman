@@ -27,6 +27,9 @@ Pac-Man is a classic arcade game originally developed in Japan in 1980. You cont
 ### Opening the Project
 
 1. Clone this repository
+```bash
+  git clone https://github.com/fengxin02/Pacman.git
+```
 2. Open IntelliJ IDEA, select **File > Open** and choose the project directory
 3. Wait for IDEA to index and configure the project
 4. Navigate to `src/Project/Main/Main.java`
